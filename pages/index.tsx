@@ -20,8 +20,7 @@ export default function Home() {
         <div className="container mx-auto px-6 py-4">
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-2">
-              <Sparkles className="w-8 h-8 text-indigo-600" />
-              <span className="text-2xl font-bold bg-gradient-to-r from-blue-600 to-indigo-600 bg-clip-text text-transparent">
+              <span className="text-2xl font-bold text-gray-900">
                 Cehpoint
               </span>
             </div>
@@ -35,12 +34,9 @@ export default function Home() {
       <div className="container mx-auto px-6 py-16">
         {/* Hero Section */}
         <div className="text-center mb-20 max-w-5xl mx-auto">
-          <div className="inline-block bg-blue-100 text-blue-700 px-4 py-2 rounded-full text-sm font-semibold mb-6">
-            Powered by Google Gemini AI
-          </div>
           <h1 className="text-5xl md:text-6xl font-bold text-gray-900 mb-6 leading-tight">
             Enterprise Technology Consulting,
-            <span className="block bg-gradient-to-r from-blue-600 via-indigo-600 to-purple-600 bg-clip-text text-transparent">
+            <span className="block text-blue-600">
               Powered by Artificial Intelligence
             </span>
           </h1>
@@ -51,30 +47,29 @@ export default function Home() {
           </p>
           <div className="flex gap-4 justify-center flex-wrap">
             <Button size="lg" onClick={() => router.push('/login')} className="shadow-xl">
-              Start Your Assessment
-              <Sparkles className="w-5 h-5" />
+              Get Started
             </Button>
             <Button variant="outline" size="lg" onClick={() => router.push('/login')}>
-              View Demo
+              Learn More
             </Button>
           </div>
           
           {/* Trust Indicators */}
           <div className="grid grid-cols-2 md:grid-cols-4 gap-8 mt-16 pt-8 border-t border-gray-200">
             <div className="text-center">
-              <div className="text-3xl font-bold text-indigo-600 mb-1">500+</div>
+              <div className="text-3xl font-bold text-gray-900 mb-1">500+</div>
               <div className="text-sm text-gray-600">Businesses Analyzed</div>
             </div>
             <div className="text-center">
-              <div className="text-3xl font-bold text-indigo-600 mb-1">95%</div>
+              <div className="text-3xl font-bold text-gray-900 mb-1">95%</div>
               <div className="text-sm text-gray-600">Implementation Rate</div>
             </div>
             <div className="text-center">
-              <div className="text-3xl font-bold text-indigo-600 mb-1">$2.4M</div>
+              <div className="text-3xl font-bold text-gray-900 mb-1">$2.4M</div>
               <div className="text-sm text-gray-600">Avg. Cost Savings</div>
             </div>
             <div className="text-center">
-              <div className="text-3xl font-bold text-indigo-600 mb-1">15min</div>
+              <div className="text-3xl font-bold text-gray-900 mb-1">15min</div>
               <div className="text-sm text-gray-600">Assessment Time</div>
             </div>
           </div>
@@ -93,7 +88,7 @@ export default function Home() {
           
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6 max-w-6xl mx-auto">
             <div className="bg-white rounded-xl shadow-lg p-6 hover:shadow-2xl transition-all border border-gray-100">
-              <div className="w-14 h-14 bg-gradient-to-br from-blue-500 to-cyan-500 rounded-xl flex items-center justify-center mb-4">
+              <div className="w-14 h-14 bg-blue-600 rounded-xl flex items-center justify-center mb-4">
                 <Target className="w-7 h-7 text-white" />
               </div>
               <h3 className="text-lg font-bold text-gray-900 mb-2">
@@ -105,7 +100,7 @@ export default function Home() {
             </div>
 
             <div className="bg-white rounded-xl shadow-lg p-6 hover:shadow-2xl transition-all border border-gray-100">
-              <div className="w-14 h-14 bg-gradient-to-br from-red-500 to-pink-600 rounded-xl flex items-center justify-center mb-4">
+              <div className="w-14 h-14 bg-red-600 rounded-xl flex items-center justify-center mb-4">
                 <Shield className="w-7 h-7 text-white" />
               </div>
               <h3 className="text-lg font-bold text-gray-900 mb-2">
@@ -117,7 +112,7 @@ export default function Home() {
             </div>
 
             <div className="bg-white rounded-xl shadow-lg p-6 hover:shadow-2xl transition-all border border-gray-100">
-              <div className="w-14 h-14 bg-gradient-to-br from-amber-500 to-orange-500 rounded-xl flex items-center justify-center mb-4">
+              <div className="w-14 h-14 bg-orange-600 rounded-xl flex items-center justify-center mb-4">
                 <Zap className="w-7 h-7 text-white" />
               </div>
               <h3 className="text-lg font-bold text-gray-900 mb-2">
@@ -129,7 +124,7 @@ export default function Home() {
             </div>
 
             <div className="bg-white rounded-xl shadow-lg p-6 hover:shadow-2xl transition-all border border-gray-100">
-              <div className="w-14 h-14 bg-gradient-to-br from-green-500 to-emerald-600 rounded-xl flex items-center justify-center mb-4">
+              <div className="w-14 h-14 bg-green-600 rounded-xl flex items-center justify-center mb-4">
                 <Brain className="w-7 h-7 text-white" />
               </div>
               <h3 className="text-lg font-bold text-gray-900 mb-2">
@@ -247,7 +242,6 @@ export default function Home() {
             className="bg-white text-indigo-600 hover:bg-gray-100 shadow-xl"
           >
             Get Your Free Assessment
-            <Sparkles className="w-5 h-5" />
           </Button>
         </div>
       </div>
@@ -256,7 +250,6 @@ export default function Home() {
       <footer className="bg-gray-900 text-gray-400 py-8 mt-20">
         <div className="container mx-auto px-6 text-center">
           <div className="flex items-center justify-center gap-2 mb-4">
-            <Sparkles className="w-6 h-6 text-indigo-400" />
             <span className="text-xl font-bold text-white">Cehpoint</span>
           </div>
           <p className="text-sm">
