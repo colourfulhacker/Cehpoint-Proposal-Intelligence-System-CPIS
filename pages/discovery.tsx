@@ -3,7 +3,6 @@ import { useRouter } from 'next/router';
 import Button from '@/components/Button';
 import Card from '@/components/Card';
 import { isAuthenticated, saveSession, getSession, getUser } from '@/lib/storage';
-import { parseFile, fetchURLContent } from '@/lib/fileParser';
 import { Upload, FileText, Link as LinkIcon, Sparkles } from 'lucide-react';
 import toast, { Toaster } from 'react-hot-toast';
 
@@ -27,24 +26,34 @@ export default function Discovery() {
     toast.loading('Analyzing your business profile...');
 
     try {
-      const content = await parseFile(file);
+      const formData = new FormData();
+      formData.append('file', file);
       
-      const response = await fetch('/api/analyze-document', {
+      const parseResponse = await fetch('/api/parse-file', {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ content, fileName: file.name }),
+        body: formData,
       });
 
-      if (!response.ok) throw new Error('Analysis failed');
+      if (!parseResponse.ok) throw new Error('File parsing failed');
+      
+      const { content, fileName } = await parseResponse.json();
+      
+      const analyzeResponse = await fetch('/api/analyze-document', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ content, fileName }),
+      });
 
-      const businessProfile = await response.json();
+      if (!analyzeResponse.ok) throw new Error('Analysis failed');
+
+      const businessProfile = await analyzeResponse.json();
       
       const user = getUser();
       const session = {
         userId: user?.id || '',
         businessProfile,
         uploadedFile: {
-          name: file.name,
+          name: fileName,
           type: file.type,
           content,
         },
@@ -72,17 +81,25 @@ export default function Discovery() {
     toast.loading('Fetching content from URL...');
 
     try {
-      const content = await fetchURLContent(url);
+      const fetchResponse = await fetch('/api/fetch-url', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ url }),
+      });
+
+      if (!fetchResponse.ok) throw new Error('URL fetch failed');
       
-      const response = await fetch('/api/analyze-document', {
+      const { content } = await fetchResponse.json();
+      
+      const analyzeResponse = await fetch('/api/analyze-document', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ content, fileName: url }),
       });
 
-      if (!response.ok) throw new Error('Analysis failed');
+      if (!analyzeResponse.ok) throw new Error('Analysis failed');
 
-      const businessProfile = await response.json();
+      const businessProfile = await analyzeResponse.json();
       
       const user = getUser();
       const session = {
@@ -154,11 +171,11 @@ export default function Discovery() {
                     className="hidden"
                     id="file-upload"
                   />
-                  <label htmlFor="file-upload">
-                    <Button as="span" fullWidth disabled={loading}>
+                  <label htmlFor="file-upload" className="block">
+                    <div className={`font-semibold rounded-lg transition-all duration-200 flex items-center justify-center gap-2 px-6 py-3 text-base w-full bg-gradient-to-r from-blue-600 to-indigo-600 text-white hover:from-blue-700 hover:to-indigo-700 shadow-lg hover:shadow-xl ${loading ? 'opacity-50 cursor-not-allowed' : 'cursor-pointer'}`}>
                       <FileText className="w-5 h-5" />
                       Choose File
-                    </Button>
+                    </div>
                   </label>
                   
                   <Button

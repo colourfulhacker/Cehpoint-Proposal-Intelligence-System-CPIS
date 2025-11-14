@@ -8,6 +8,7 @@ interface ButtonProps {
   fullWidth?: boolean;
   disabled?: boolean;
   type?: 'button' | 'submit' | 'reset';
+  className?: string;
 }
 
 export default function Button({
@@ -18,6 +19,7 @@ export default function Button({
   fullWidth = false,
   disabled = false,
   type = 'button',
+  className = '',
 }: ButtonProps) {
   const baseStyles = 'font-semibold rounded-lg transition-all duration-200 flex items-center justify-center gap-2';
   
@@ -41,7 +43,7 @@ export default function Button({
       type={type}
       onClick={onClick}
       disabled={disabled}
-      className={`${baseStyles} ${variantStyles[variant]} ${sizeStyles[size]} ${widthStyle} ${disabledStyle}`}
+      className={`${baseStyles} ${variantStyles[variant]} ${sizeStyles[size]} ${widthStyle} ${disabledStyle} ${className}`}
     >
       {children}
     </button>
