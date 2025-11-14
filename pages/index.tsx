@@ -214,7 +214,7 @@ export default function Home() {
               <Users className="w-7 h-7 text-indigo-600 flex-shrink-0 mt-1" />
               <div>
                 <h4 className="font-semibold text-gray-900 mb-3 text-lg">Industry Expertise</h4>
-                <p className="text-sm text-gray-600 leading-relaxed font-light">Solutions tailored to your sector's unique challenges and compliance requirements</p>
+                <p className="text-sm text-gray-600 leading-relaxed font-light">Solutions tailored to your sector&apos;s unique challenges and compliance requirements</p>
               </div>
             </div>
             

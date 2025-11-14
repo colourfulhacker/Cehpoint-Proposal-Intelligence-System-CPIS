@@ -2,7 +2,6 @@ import type { NextApiRequest, NextApiResponse } from 'next';
 import formidable from 'formidable';
 import fs from 'fs';
 import mammoth from 'mammoth';
-import pdfParse from 'pdf-parse';
 
 export const config = {
   api: {
@@ -36,6 +35,8 @@ export default async function handler(
     
     if (mimeType === 'application/pdf') {
       const dataBuffer = fs.readFileSync(filePath);
+      // eslint-disable-next-line
+      const pdfParse = require('pdf-parse');
       const data = await pdfParse(dataBuffer);
       content = data.text;
       

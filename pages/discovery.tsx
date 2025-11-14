@@ -1,16 +1,12 @@
-import { useState, useEffect } from 'react';
+import { useEffect } from 'react';
 import { useRouter } from 'next/router';
 import Button from '@/components/Button';
 import Card from '@/components/Card';
 import { isAuthenticated } from '@/lib/storage';
-import { Upload, FileText, AlertCircle } from 'lucide-react';
-import toast, { Toaster } from 'react-hot-toast';
+import { FileText, AlertCircle } from 'lucide-react';
 
 export default function Discovery() {
   const router = useRouter();
-  const [loading, setLoading] = useState(false);
-  const [uploadMethod, setUploadMethod] = useState<'file' | 'url' | null>(null);
-  const [url, setUrl] = useState('');
 
   useEffect(() => {
     if (!isAuthenticated()) {
@@ -18,122 +14,12 @@ export default function Discovery() {
     }
   }, [router]);
 
-  const handleFileUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
-    const file = e.target.files?.[0];
-    if (!file) return;
-
-    setLoading(true);
-    toast.loading('Analyzing your business profile...');
-
-    try {
-      const formData = new FormData();
-      formData.append('file', file);
-      
-      const parseResponse = await fetch('/api/parse-file', {
-        method: 'POST',
-        body: formData,
-      });
-
-      if (!parseResponse.ok) throw new Error('File parsing failed');
-      
-      const { content, fileName } = await parseResponse.json();
-      
-      const analyzeResponse = await fetch('/api/analyze-document', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ content, fileName }),
-      });
-
-      if (!analyzeResponse.ok) throw new Error('Analysis failed');
-
-      const businessProfile = await analyzeResponse.json();
-      
-      const user = getUser();
-      const session = {
-        userId: user?.id || '',
-        businessProfile,
-        uploadedFile: {
-          name: fileName,
-          type: file.type,
-          content,
-        },
-        lastUpdated: new Date().toISOString(),
-      };
-      
-      saveSession(session);
-      toast.dismiss();
-      toast.success('Profile analyzed successfully!');
-      
-      setTimeout(() => {
-        router.push('/questionnaire?fromUpload=true');
-      }, 1000);
-    } catch (error) {
-      toast.dismiss();
-      toast.error('Failed to analyze document. Please try again.');
-      setLoading(false);
-    }
-  };
-
-  const handleURLSubmit = async () => {
-    if (!url) return;
-
-    setLoading(true);
-    toast.loading('Fetching content from URL...');
-
-    try {
-      const fetchResponse = await fetch('/api/fetch-url', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ url }),
-      });
-
-      if (!fetchResponse.ok) throw new Error('URL fetch failed');
-      
-      const { content } = await fetchResponse.json();
-      
-      const analyzeResponse = await fetch('/api/analyze-document', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ content, fileName: url }),
-      });
-
-      if (!analyzeResponse.ok) throw new Error('Analysis failed');
-
-      const businessProfile = await analyzeResponse.json();
-      
-      const user = getUser();
-      const session = {
-        userId: user?.id || '',
-        businessProfile,
-        uploadedFile: {
-          name: url,
-          type: 'url',
-          content,
-        },
-        lastUpdated: new Date().toISOString(),
-      };
-      
-      saveSession(session);
-      toast.dismiss();
-      toast.success('Website analyzed successfully!');
-      
-      setTimeout(() => {
-        router.push('/questionnaire?fromUpload=true');
-      }, 1000);
-    } catch (error) {
-      toast.dismiss();
-      toast.error('Failed to fetch URL content. Please try again.');
-      setLoading(false);
-    }
-  };
-
   const handleQuestionnaire = () => {
     router.push('/questionnaire');
   };
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-50 via-indigo-50 to-purple-50">
-      <Toaster position="top-right" />
       
       <div className="container mx-auto px-4 py-12">
         <div className="text-center mb-12">
