@@ -2,8 +2,8 @@ import { useState, useEffect } from 'react';
 import { useRouter } from 'next/router';
 import Button from '@/components/Button';
 import Card from '@/components/Card';
-import { isAuthenticated, saveSession, getSession, getUser } from '@/lib/storage';
-import { Upload, FileText, Link as LinkIcon, Sparkles } from 'lucide-react';
+import { isAuthenticated } from '@/lib/storage';
+import { Upload, FileText, AlertCircle } from 'lucide-react';
 import toast, { Toaster } from 'react-hot-toast';
 
 export default function Discovery() {
@@ -137,110 +137,43 @@ export default function Discovery() {
       
       <div className="container mx-auto px-4 py-12">
         <div className="text-center mb-12">
-          <div className="flex items-center justify-center gap-2 mb-4">
-            <Sparkles className="w-8 h-8 text-indigo-600" />
-            <h1 className="text-4xl font-bold bg-gradient-to-r from-blue-600 to-indigo-600 bg-clip-text text-transparent">
-              Business Discovery
-            </h1>
-          </div>
-          <p className="text-xl text-gray-700 max-w-3xl mx-auto">
+          <h1 className="text-4xl font-bold text-gray-900 mb-4">
+            Business Discovery
+          </h1>
+          <p className="text-xl text-gray-600 max-w-3xl mx-auto">
             Share your business information to receive AI-powered, personalized IT and security recommendations
           </p>
         </div>
 
-        <div className="max-w-5xl mx-auto grid md:grid-cols-2 gap-8 mb-8">
-          <Card hover>
+        <div className="max-w-4xl mx-auto mb-8">
+          <Card>
             <div className="text-center">
-              <div className="w-16 h-16 bg-gradient-to-r from-blue-500 to-indigo-500 rounded-full flex items-center justify-center mx-auto mb-4">
-                <Upload className="w-8 h-8 text-white" />
-              </div>
-              <h2 className="text-2xl font-bold text-gray-800 mb-3">
-                Upload Business Profile
-              </h2>
-              <p className="text-gray-600 mb-6">
-                Upload your existing business profile document (PDF, DOCX, or TXT)
-              </p>
-              
-              {uploadMethod === 'file' ? (
-                <div className="space-y-4">
-                  <input
-                    type="file"
-                    accept=".pdf,.doc,.docx,.txt"
-                    onChange={handleFileUpload}
-                    disabled={loading}
-                    className="hidden"
-                    id="file-upload"
-                  />
-                  <label htmlFor="file-upload" className="block">
-                    <div className={`font-semibold rounded-lg transition-all duration-200 flex items-center justify-center gap-2 px-6 py-3 text-base w-full bg-gradient-to-r from-blue-600 to-indigo-600 text-white hover:from-blue-700 hover:to-indigo-700 shadow-lg hover:shadow-xl ${loading ? 'opacity-50 cursor-not-allowed' : 'cursor-pointer'}`}>
-                      <FileText className="w-5 h-5" />
-                      Choose File
-                    </div>
-                  </label>
-                  
-                  <Button
-                    variant="outline"
-                    fullWidth
-                    onClick={() => setUploadMethod('url')}
-                    disabled={loading}
-                  >
-                    Or Enter Website URL
-                  </Button>
-                </div>
-              ) : uploadMethod === 'url' ? (
-                <div className="space-y-4">
-                  <input
-                    type="url"
-                    value={url}
-                    onChange={(e) => setUrl(e.target.value)}
-                    placeholder="https://yourcompany.com"
-                    className="w-full px-4 py-3 border-2 border-gray-300 rounded-lg focus:border-blue-500 outline-none"
-                    disabled={loading}
-                  />
-                  <Button fullWidth onClick={handleURLSubmit} disabled={loading || !url}>
-                    <LinkIcon className="w-5 h-5" />
-                    Analyze Website
-                  </Button>
-                  <Button
-                    variant="outline"
-                    fullWidth
-                    onClick={() => setUploadMethod('file')}
-                    disabled={loading}
-                  >
-                    Or Upload Document
-                  </Button>
-                </div>
-              ) : (
-                <div className="space-y-3">
-                  <Button fullWidth onClick={() => setUploadMethod('file')}>
-                    <FileText className="w-5 h-5" />
-                    Upload Document
-                  </Button>
-                  <Button variant="outline" fullWidth onClick={() => setUploadMethod('url')}>
-                    <LinkIcon className="w-5 h-5" />
-                    Enter Website URL
-                  </Button>
-                </div>
-              )}
-            </div>
-          </Card>
-
-          <Card hover>
-            <div className="text-center">
-              <div className="w-16 h-16 bg-gradient-to-r from-purple-500 to-pink-500 rounded-full flex items-center justify-center mx-auto mb-4">
+              <div className="w-16 h-16 bg-blue-600 rounded-xl flex items-center justify-center mx-auto mb-4">
                 <FileText className="w-8 h-8 text-white" />
               </div>
-              <h2 className="text-2xl font-bold text-gray-800 mb-3">
-                Fill Smart Questionnaire
+              <h2 className="text-2xl font-bold text-gray-900 mb-3">
+                Complete Business Questionnaire
               </h2>
-              <p className="text-gray-600 mb-6">
-                Answer a structured questionnaire to help us understand your business needs
+              <p className="text-gray-600 mb-6 max-w-2xl mx-auto">
+                Answer our comprehensive 7-section questionnaire to help us understand your business needs and provide personalized technology recommendations
               </p>
-              <Button variant="secondary" fullWidth size="lg" onClick={handleQuestionnaire}>
+              <Button fullWidth size="lg" onClick={handleQuestionnaire}>
                 Start Questionnaire
               </Button>
             </div>
           </Card>
+          
+          <div className="mt-6 bg-amber-50 border border-amber-200 rounded-lg p-4">
+            <div className="flex items-start gap-3">
+              <AlertCircle className="w-5 h-5 text-amber-600 flex-shrink-0 mt-0.5" />
+              <div>
+                <h3 className="font-semibold text-amber-900 mb-1">Document Upload Temporarily Unavailable</h3>
+                <p className="text-sm text-amber-800">
+                  The business profile upload feature is currently under development and requires technical configuration. Please use the questionnaire to provide your business information. Our team is working to enable document uploads soon.
+                </p>
+              </div>
+            </div>
+          </div>
         </div>
 
         <div className="max-w-3xl mx-auto">
