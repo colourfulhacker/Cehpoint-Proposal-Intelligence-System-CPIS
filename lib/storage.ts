@@ -46,3 +46,36 @@ export function clearUser(): void {
 export function isAuthenticated(): boolean {
   return getUser() !== null;
 }
+
+export function logout(): void {
+  if (typeof window !== 'undefined') {
+    localStorage.removeItem(USER_KEY);
+    localStorage.removeItem(SESSION_KEY);
+    localStorage.removeItem('cehpoint_questionnaire_draft');
+  }
+}
+
+const QUESTIONNAIRE_DRAFT_KEY = 'cehpoint_questionnaire_draft';
+
+export function saveQuestionnaireDraft(data: any): void {
+  if (typeof window !== 'undefined') {
+    localStorage.setItem(QUESTIONNAIRE_DRAFT_KEY, JSON.stringify({
+      ...data,
+      lastSaved: new Date().toISOString(),
+    }));
+  }
+}
+
+export function getQuestionnaireDraft(): any | null {
+  if (typeof window !== 'undefined') {
+    const data = localStorage.getItem(QUESTIONNAIRE_DRAFT_KEY);
+    return data ? JSON.parse(data) : null;
+  }
+  return null;
+}
+
+export function clearQuestionnaireDraft(): void {
+  if (typeof window !== 'undefined') {
+    localStorage.removeItem(QUESTIONNAIRE_DRAFT_KEY);
+  }
+}

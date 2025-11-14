@@ -21,7 +21,7 @@ export default function Input({
   multiline = false,
   rows = 3,
 }: InputProps) {
-  const baseStyles = 'w-full px-4 py-3 border-2 border-gray-300 rounded-lg focus:border-blue-500 focus:ring-2 focus:ring-blue-200 outline-none transition-all';
+  const baseStyles = 'w-full px-4 py-3 border-2 border-gray-300 rounded-lg focus:border-blue-500 focus:ring-2 focus:ring-blue-200 outline-none transition-all text-gray-900 placeholder:text-gray-400 placeholder:font-normal bg-white';
   
   return (
     <div className="mb-4">
