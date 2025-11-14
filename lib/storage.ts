@@ -1,12 +1,52 @@
 import { ClientSession, User } from "@/types";
 
+// TODO: When Supabase is integrated, uncomment this import and remove localStorage code
+// import { supabase } from './supabase';
+
 const SESSION_KEY = 'cehpoint_session';
 const USER_KEY = 'cehpoint_user';
 
+/**
+ * BACKEND INTEGRATION GUIDE:
+ * 
+ * This file currently uses localStorage for MVP demonstration.
+ * To integrate with Supabase backend:
+ * 
+ * 1. Rename lib/supabase.ts.example to lib/supabase.ts
+ * 2. Uncomment the supabase import above
+ * 3. Replace each localStorage function with Supabase calls
+ * 4. See SUPABASE_INTEGRATION.md for complete guide
+ * 
+ * Example Supabase replacement for saveSession:
+ * 
+ * export async function saveSession(session: ClientSession): Promise<void> {
+ *   const { data: { user } } = await supabase.auth.getUser();
+ *   if (!user) throw new Error('Not authenticated');
+ *   
+ *   await supabase.from('questionnaire_submissions').upsert({
+ *     user_id: user.id,
+ *     ...session.businessProfile,
+ *   });
+ * }
+ */
+
 export function saveSession(session: ClientSession): void {
+  // MVP: Using localStorage
   if (typeof window !== 'undefined') {
     localStorage.setItem(SESSION_KEY, JSON.stringify(session));
   }
+  
+  // TODO: Supabase implementation (uncomment when ready):
+  // const saveSessionToSupabase = async () => {
+  //   const { data: { user } } = await supabase.auth.getUser();
+  //   if (!user) return;
+  //   
+  //   await supabase.from('questionnaire_submissions').upsert({
+  //     user_id: user.id,
+  //     ...session.businessProfile,
+  //   });
+  // };
+  // saveSessionToSupabase();
 }
 
 export function getSession(): ClientSession | null {
@@ -44,7 +84,15 @@ export function clearUser(): void {
 }
 
 export function isAuthenticated(): boolean {
+  // MVP: Using localStorage
   return getUser() !== null;
+  
+  // TODO: Supabase implementation (uncomment when ready):
+  // const checkAuth = async () => {
+  //   const { data: { session } } = await supabase.auth.getSession();
+  //   return session !== null;
+  // };
+  // return checkAuth();
 }
 
 export function logout(): void {
