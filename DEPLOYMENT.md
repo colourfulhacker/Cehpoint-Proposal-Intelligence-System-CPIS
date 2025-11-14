@@ -12,10 +12,12 @@ This document provides a comprehensive checklist for deploying Cehpoint to produ
 - [ ] Verify all TypeScript types are correct (no `any` types if possible)
 
 ### 2. Environment Variables
-- [ ] `GEMINI_API_KEY` is set in Vercel environment variables
-- [ ] All environment variables are documented in README or .env.example
+- [ ] `GEMINI_API_KEY` is set and verified in Vercel environment variables
+- [ ] Supabase variables added if backend is integrated
+- [ ] All environment variables are documented in README
 - [ ] No secrets are hardcoded in the codebase
 - [ ] Environment variables are validated at runtime (see lib/env-validation.ts)
+- [ ] Test validateEnv() function in API routes catches missing variables
 
 ### 3. Feature Completeness
 - [ ] Landing page is professional and loads correctly
@@ -75,16 +77,27 @@ Install Command: npm install
 ```
 
 ### Step 3: Set Environment Variables
+
+#### For MVP (Required)
 Add these in Vercel dashboard (Settings → Environment Variables):
 
 ```
 GEMINI_API_KEY=your_actual_gemini_api_key
 ```
 
+#### For Supabase Backend (Optional - Add When Integrating)
+```
+NEXT_PUBLIC_SUPABASE_URL=https://your-project.supabase.co
+NEXT_PUBLIC_SUPABASE_ANON_KEY=your_anon_key
+SUPABASE_SERVICE_ROLE_KEY=your_service_role_key
+```
+
 **Important:**
 - Add for all environments (Production, Preview, Development)
 - Never commit API keys to Git
 - Use Vercel's encrypted storage
+- `NEXT_PUBLIC_*` variables are exposed to browser
+- `SUPABASE_SERVICE_ROLE_KEY` is server-only (never expose to client)
 
 ### Step 4: Deploy
 1. Click "Deploy"
@@ -92,20 +105,38 @@ GEMINI_API_KEY=your_actual_gemini_api_key
 3. Verify deployment is successful
 
 ### Step 5: Test Production Build
+
+#### Environment Variable Verification
+- [ ] Visit Vercel Functions → Logs
+- [ ] Trigger an API call (submit questionnaire)
+- [ ] Verify `GEMINI_API_KEY` is loaded correctly
+- [ ] Check for "Environment variable" errors in logs
+
+#### Complete User Flow Testing
 - [ ] Visit your production URL
 - [ ] Test the complete user flow:
-  1. Landing page loads
+  1. Landing page loads correctly
   2. Click "Get Started"
-  3. Sign up with email
-  4. Redirected to Discovery
+  3. Sign up with email (localStorage)
+  4. Redirected to Discovery page
   5. Click "Start Questionnaire"
   6. Fill out at least one section
-  7. Submit questionnaire
-  8. AI analysis completes
-  9. Dashboard shows recommendations
-- [ ] Test on mobile device
+  7. Navigate between sections (verify auto-save)
+  8. Submit questionnaire
+  9. AI analysis completes successfully
+  10. Dashboard shows 6-12 recommendations
+  11. Recommendations have categories, priorities, costs
+  12. Refresh page (verify session persists)
+- [ ] Test on mobile device (iPhone/Android)
+- [ ] Test on different browsers (Chrome, Safari, Firefox)
 - [ ] Check browser console for errors
-- [ ] Verify API calls succeed
+- [ ] Verify all API calls succeed (Network tab)
+
+#### Gemini API Verification
+- [ ] Submit questionnaire and verify AI analysis works
+- [ ] Check Gemini API quota at [Google AI Studio](https://ai.google.dev)
+- [ ] Verify API responses are complete (not truncated)
+- [ ] Test error handling (temporarily remove API key, verify graceful error)
 
 ---
 

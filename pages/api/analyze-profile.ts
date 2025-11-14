@@ -16,23 +16,40 @@ export default async function handler(
 
     const businessProfile = req.body;
     
-    // TODO: When Supabase is integrated, add authentication check here
-    // const user = await getUser(req);
-    // if (!user) {
-    //   return res.status(401).json({ error: 'Unauthorized' });
-    // }
+    // TODO: When Supabase is integrated, uncomment authentication check
+    // Step 1: Uncomment the import at the top of this file:
+    // import { requireAuth } from '@/lib/auth-helpers';
+    //
+    // Step 2: Replace this comment block with:
+    // const user = await requireAuth(req, res);
+    // if (!user) return; // Response already sent by requireAuth
+    //
+    // Step 3: Use user.id to save data to database (see below)
     
     const result = await analyzeBusinessProfile(businessProfile);
     
     // TODO: When Supabase is integrated, save recommendations to database
-    // const { data, error } = await supabase
-    //   .from('ai_recommendations')
+    // Step 1: Uncomment the import at the top of this file:
+    // import { getServiceSupabase } from '@/lib/supabase';
+    //
+    // Step 2: Save questionnaire submission first:
+    // const supabase = getServiceSupabase();
+    // const { data: submission } = await supabase
+    //   .from('questionnaire_submissions')
     //   .insert({
     //     user_id: user.id,
-    //     submission_id: businessProfile.submissionId,
-    //     recommendations: result.recommendations,
-    //     project_blueprint: result.projectBlueprint,
-    //   });
+    //     ...businessProfile,
+    //   })
+    //   .select()
+    //   .single();
+    //
+    // Step 3: Save AI recommendations:
+    // await supabase.from('ai_recommendations').insert({
+    //   user_id: user.id,
+    //   submission_id: submission.id,
+    //   recommendations: result.recommendations,
+    //   project_blueprint: result.projectBlueprint,
+    // });
     
     res.status(200).json(result);
   } catch (error) {
