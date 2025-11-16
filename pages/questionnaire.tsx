@@ -3,6 +3,7 @@ import { useRouter } from 'next/router';
 import Button from '@/components/Button';
 import Input from '@/components/Input';
 import Select from '@/components/Select';
+import MultiSelect from '@/components/MultiSelect';
 import Card from '@/components/Card';
 import { isAuthenticated, saveSession, getSession, getUser, saveQuestionnaireDraft, getQuestionnaireDraft, clearQuestionnaireDraft } from '@/lib/storage';
 import { BusinessProfile } from '@/types';
@@ -21,7 +22,7 @@ export default function Questionnaire() {
     businessModel: '',
     yearEstablished: '',
     teamSize: '',
-    operatingRegions: '',
+    operatingRegions: [],
     coreOperations: '',
     workflowChallenges: '',
     manualTasks: '',
@@ -65,13 +66,25 @@ export default function Questionnaire() {
     
     const draft = getQuestionnaireDraft();
     if (draft && !fromUpload) {
-      setFormData(draft.formData);
+      const normalizedData = {
+        ...draft.formData,
+        operatingRegions: Array.isArray(draft.formData.operatingRegions) 
+          ? draft.formData.operatingRegions 
+          : draft.formData.operatingRegions ? [draft.formData.operatingRegions] : []
+      };
+      setFormData(normalizedData);
       if (draft.customIndustry) setCustomIndustry(draft.customIndustry);
       if (draft.currentSection) setCurrentSection(draft.currentSection);
     } else if (fromUpload) {
       const session = getSession();
       if (session?.businessProfile) {
-        setFormData(session.businessProfile);
+        const normalizedData = {
+          ...session.businessProfile,
+          operatingRegions: Array.isArray(session.businessProfile.operatingRegions) 
+            ? session.businessProfile.operatingRegions 
+            : session.businessProfile.operatingRegions ? [session.businessProfile.operatingRegions] : []
+        };
+        setFormData(normalizedData);
       }
     }
   }, [router, fromUpload]);
@@ -156,8 +169,8 @@ export default function Questionnaire() {
         },
         { 
           name: 'operatingRegions', 
-          label: 'Operating Countries/Regions', 
-          type: 'select', 
+          label: 'Operating Countries/Regions (Select all that apply)', 
+          type: 'multiselect', 
           required: true,
           options: [
             { value: 'United States', label: 'United States' },
@@ -348,11 +361,17 @@ export default function Questionnaire() {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     
+    if (formData.operatingRegions.length === 0) {
+      toast.error('Please select at least one operating region');
+      return;
+    }
+    
     setLoading(true);
     toast.loading('Generating your personalized recommendations...');
 
     try {
       const submissionData = { ...formData };
+      
       if (formData.industry === 'Other' && customIndustry.trim()) {
         submissionData.industry = customIndustry;
       }
@@ -363,7 +382,10 @@ export default function Questionnaire() {
         body: JSON.stringify(submissionData),
       });
 
-      if (!response.ok) throw new Error('Analysis failed');
+      if (!response.ok) {
+        const errorData = await response.json().catch(() => ({}));
+        throw new Error(errorData.error || 'Analysis failed');
+      }
 
       const result = await response.json();
       
@@ -385,8 +407,10 @@ export default function Questionnaire() {
         router.push('/dashboard');
       }, 1000);
     } catch (error) {
+      console.error('Submission error:', error);
       toast.dismiss();
-      toast.error('Failed to generate recommendations. Please try again.');
+      const errorMessage = error instanceof Error ? error.message : 'Failed to generate recommendations';
+      toast.error(`${errorMessage}. Please try again or contact support.`);
       setLoading(false);
     }
   };
@@ -480,6 +504,15 @@ export default function Questionnaire() {
                         />
                         <span className="text-gray-800 font-medium">{field.label}</span>
                       </label>
+                    ) : field.type === 'multiselect' ? (
+                      <MultiSelect
+                        label={field.label}
+                        value={formData[field.name as keyof BusinessProfile] as string[]}
+                        onChange={(value) => updateField(field.name as keyof BusinessProfile, value)}
+                        options={field.options || []}
+                        placeholder={`Select ${field.label.toLowerCase()}`}
+                        required={field.required}
+                      />
                     ) : field.type === 'select' ? (
                       <>
                         <Select

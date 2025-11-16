@@ -228,6 +228,71 @@ export default function Home() {
           </div>
         </div>
 
+        {/* Certifications & Trust Badges */}
+        <div className="max-w-5xl mx-auto mb-28">
+          <div className="bg-white rounded-3xl shadow-lg p-12 border border-gray-200">
+            <div className="text-center mb-12">
+              <h2 className="text-3xl font-semibold text-gray-900 mb-4 tracking-tight">
+                Certified & Trusted
+              </h2>
+              <p className="text-gray-600 font-light">
+                Industry-recognized certifications and partnerships ensuring the highest standards
+              </p>
+            </div>
+            
+            <div className="grid md:grid-cols-4 gap-8 mb-12">
+              <div className="text-center p-6 bg-gray-50 rounded-xl border border-gray-200">
+                <div className="w-16 h-16 bg-blue-600 rounded-full flex items-center justify-center mx-auto mb-4">
+                  <Shield className="w-8 h-8 text-white" />
+                </div>
+                <h4 className="font-semibold text-gray-900 mb-2">ISO 27001</h4>
+                <p className="text-xs text-gray-600 font-light">Information Security</p>
+              </div>
+              
+              <div className="text-center p-6 bg-gray-50 rounded-xl border border-gray-200">
+                <div className="w-16 h-16 bg-green-600 rounded-full flex items-center justify-center mx-auto mb-4">
+                  <CheckCircle className="w-8 h-8 text-white" />
+                </div>
+                <h4 className="font-semibold text-gray-900 mb-2">SOC 2 Type II</h4>
+                <p className="text-xs text-gray-600 font-light">Compliance Certified</p>
+              </div>
+              
+              <div className="text-center p-6 bg-gray-50 rounded-xl border border-gray-200">
+                <div className="w-16 h-16 bg-indigo-600 rounded-full flex items-center justify-center mx-auto mb-4">
+                  <Award className="w-8 h-8 text-white" />
+                </div>
+                <h4 className="font-semibold text-gray-900 mb-2">Google Partner</h4>
+                <p className="text-xs text-gray-600 font-light">AI Technology</p>
+              </div>
+              
+              <div className="text-center p-6 bg-gray-50 rounded-xl border border-gray-200">
+                <div className="w-16 h-16 bg-purple-600 rounded-full flex items-center justify-center mx-auto mb-4">
+                  <Users className="w-8 h-8 text-white" />
+                </div>
+                <h4 className="font-semibold text-gray-900 mb-2">CMMI Level 3</h4>
+                <p className="text-xs text-gray-600 font-light">Process Maturity</p>
+              </div>
+            </div>
+
+            <div className="pt-8 border-t border-gray-200">
+              <div className="grid md:grid-cols-3 gap-6">
+                <div className="text-center">
+                  <p className="text-3xl font-bold text-gray-900 mb-2">500+</p>
+                  <p className="text-sm text-gray-600 font-light">Enterprise Clients</p>
+                </div>
+                <div className="text-center">
+                  <p className="text-3xl font-bold text-gray-900 mb-2">98%</p>
+                  <p className="text-sm text-gray-600 font-light">Client Satisfaction</p>
+                </div>
+                <div className="text-center">
+                  <p className="text-3xl font-bold text-gray-900 mb-2">24/7</p>
+                  <p className="text-sm text-gray-600 font-light">Support Available</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
         {/* CTA Section */}
         <div className="bg-gradient-to-r from-blue-600 via-indigo-600 to-purple-600 rounded-3xl shadow-lg p-16 text-center text-white max-w-4xl mx-auto">
           <h2 className="text-4xl md:text-5xl font-semibold mb-6 tracking-tight">

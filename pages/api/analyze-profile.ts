@@ -1,6 +1,9 @@
 import type { NextApiRequest, NextApiResponse } from 'next';
 import { analyzeBusinessProfile } from '@/lib/gemini';
 import { requireEnv } from '@/lib/env-validation';
+import { BusinessProfileSchema, normalizeBusinessProfile } from '@/lib/validation';
+
+const MAX_PAYLOAD_SIZE = 1024 * 1024;
 
 export default async function handler(
   req: NextApiRequest,
@@ -11,10 +14,25 @@ export default async function handler(
   }
 
   try {
-    // Validate environment
     requireEnv(process.env.GEMINI_API_KEY, 'GEMINI_API_KEY');
 
-    const businessProfile = req.body;
+    const payloadSize = JSON.stringify(req.body).length;
+    if (payloadSize > MAX_PAYLOAD_SIZE) {
+      return res.status(413).json({ error: 'Request payload too large' });
+    }
+
+    const normalizedProfile = normalizeBusinessProfile(req.body);
+    
+    const validation = BusinessProfileSchema.safeParse(normalizedProfile);
+    if (!validation.success) {
+      console.error('Profile validation failed:', validation.error);
+      return res.status(400).json({ 
+        error: 'Invalid business profile data',
+        details: validation.error.issues[0]?.message || 'Validation failed'
+      });
+    }
+
+    const businessProfile = validation.data;
     
     // TODO: When Supabase is integrated, uncomment authentication check
     // Step 1: Uncomment the import at the top of this file:

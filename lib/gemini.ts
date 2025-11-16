@@ -1,5 +1,6 @@
 import { GoogleGenAI } from "@google/genai";
 import { BusinessProfile, ServiceRecommendation, ProjectBlueprint } from "@/types";
+import { GeminiAnalysisResponseSchema, BusinessProfileSchema, normalizeBusinessProfile } from "./validation";
 
 const ai = new GoogleGenAI({ apiKey: process.env.GEMINI_API_KEY || "" });
 
@@ -15,7 +16,7 @@ Industry: ${profile.industry}
 Business Model: ${profile.businessModel}
 Year Established: ${profile.yearEstablished}
 Team Size: ${profile.teamSize}
-Operating Regions: ${profile.operatingRegions}
+Operating Regions: ${Array.isArray(profile.operatingRegions) ? profile.operatingRegions.join(', ') : profile.operatingRegions}
 
 CURRENT OPERATIONS:
 Core Operations: ${profile.coreOperations}
@@ -129,10 +130,36 @@ Return ONLY valid JSON in this exact format:
       contents: prompt,
     });
 
-    const result = JSON.parse(response.text);
-    return result;
+    if (!response.text) {
+      console.error("Gemini returned empty response");
+      throw new Error("AI analysis did not return results. Please try again.");
+    }
+
+    let parsed;
+    try {
+      parsed = JSON.parse(response.text);
+    } catch (parseError) {
+      console.error("Failed to parse Gemini response as JSON:", response.text);
+      throw new Error("AI response format error. Please try again.");
+    }
+    
+    const validationResult = GeminiAnalysisResponseSchema.safeParse(parsed);
+    
+    if (!validationResult.success) {
+      console.error("Gemini response validation failed:", validationResult.error);
+      throw new Error("Invalid AI response format. Please try again.");
+    }
+    
+    return validationResult.data;
   } catch (error) {
     console.error("Gemini API error:", error);
+    if (error instanceof Error && (
+      error.message.includes("Invalid AI response") ||
+      error.message.includes("AI response format") ||
+      error.message.includes("AI analysis did not")
+    )) {
+      throw error;
+    }
     throw new Error("Failed to analyze business profile with Gemini");
   }
 }
@@ -155,7 +182,7 @@ Return ONLY valid JSON in this exact format:
   "businessModel": "...",
   "yearEstablished": "...",
   "teamSize": "...",
-  "operatingRegions": "...",
+  "operatingRegions": ["region1", "region2"],
   "coreOperations": "...",
   "workflowChallenges": "...",
   "manualTasks": "...",
@@ -198,10 +225,37 @@ Return ONLY valid JSON in this exact format:
       contents: prompt,
     });
 
-    const result = JSON.parse(response.text);
-    return result;
+    if (!response.text) {
+      console.error("Gemini returned empty document analysis response");
+      throw new Error("Document analysis did not return results. Please try again.");
+    }
+
+    let parsed;
+    try {
+      parsed = JSON.parse(response.text);
+    } catch (parseError) {
+      console.error("Failed to parse document analysis response as JSON:", response.text);
+      throw new Error("Document analysis format error. Please try again.");
+    }
+    
+    const normalized = normalizeBusinessProfile(parsed);
+    
+    const validationResult = BusinessProfileSchema.safeParse(normalized);
+    
+    if (!validationResult.success) {
+      console.error("Document analysis validation failed:", validationResult.error);
+      throw new Error("Invalid document analysis format. Please check the document and try again.");
+    }
+    
+    return validationResult.data;
   } catch (error) {
     console.error("Gemini document analysis error:", error);
+    if (error instanceof Error && (
+      error.message.includes("Invalid document") ||
+      error.message.includes("Document analysis")
+    )) {
+      throw error;
+    }
     throw new Error("Failed to analyze uploaded document");
   }
 }

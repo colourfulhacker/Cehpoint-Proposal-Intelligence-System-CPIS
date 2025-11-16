@@ -11,7 +11,7 @@ export interface BusinessProfile {
   businessModel: string;
   yearEstablished: string;
   teamSize: string;
-  operatingRegions: string;
+  operatingRegions: string[];
   coreOperations: string;
   workflowChallenges: string;
   manualTasks: string;
