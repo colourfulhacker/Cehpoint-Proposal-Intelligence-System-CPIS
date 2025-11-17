@@ -479,6 +479,32 @@ export default function Questionnaire() {
       <Toaster position="top-right" />
       
       <div className="container mx-auto px-4 py-8 md:py-12">
+        {fromUpload && (
+          <div className="max-w-4xl mx-auto mb-6">
+            <div className="bg-gradient-to-r from-green-50 to-emerald-50 border-2 border-green-300 rounded-xl p-5 shadow-md">
+              <div className="flex items-start gap-4">
+                <div className="w-12 h-12 bg-green-600 rounded-xl flex items-center justify-center flex-shrink-0">
+                  <CheckCircle className="w-6 h-6 text-white" />
+                </div>
+                <div className="flex-1">
+                  <h3 className="text-lg font-bold text-green-900 mb-2">
+                    ✅ Business Profile Loaded Successfully!
+                  </h3>
+                  <p className="text-sm text-green-800 mb-3">
+                    We've automatically extracted information from your uploaded document and pre-filled the questionnaire. The form below has been populated with your business details.
+                  </p>
+                  <div className="bg-white bg-opacity-60 rounded-lg p-3 border border-green-200">
+                    <p className="text-xs text-green-900 font-semibold mb-1">📝 Please Review:</p>
+                    <p className="text-xs text-green-800">
+                      Some fields may say "Not specified in document" - please update these with accurate information. Feel free to review and modify any pre-filled information to ensure accuracy.
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        )}
+        
         <div className="text-center mb-8">
           <h1 className="text-3xl md:text-4xl font-bold bg-gradient-to-r from-blue-600 to-indigo-600 bg-clip-text text-transparent mb-4">
             Business Profile Questionnaire

@@ -171,16 +171,30 @@ Return ONLY valid JSON in this exact format:
 }
 
 export async function analyzeUploadedDocument(content: string, fileName: string): Promise<BusinessProfile> {
-  const prompt = `You are analyzing a business profile document. Extract all relevant business information and structure it into a complete business profile.
+  const prompt = `You are an expert business analyst extracting information from a business profile document. Your goal is to create the most complete and accurate business profile possible.
 
 DOCUMENT NAME: ${fileName}
 
 DOCUMENT CONTENT:
 ${content}
 
-TASK:
-Extract and structure the business information into a complete profile. If any field is not found in the document, use "Not specified" or appropriate default values.
-
+CRITICAL INSTRUCTIONS:
+1. Extract ALL explicitly stated information from the document
+2. For missing critical fields (businessName, industry, businessModel, yearEstablished, teamSize, operatingRegions):
+   - Make INTELLIGENT PREDICTIONS based on context clues in the document
+   - Use industry knowledge and document context to infer reasonable values
+   - Example: If document mentions "since 2015" but no explicit "yearEstablished", use "2015"
+   - Example: If document describes e-commerce operations but doesn't state "industry", infer "E-commerce & Retail"
+3. For non-critical fields not found in the document:
+   - For text fields: Use "Not specified in document - please provide details"
+   - For boolean fields: Default to false
+   - For challenges/goals: Make educated guesses based on industry and business type mentioned
+4. Be thorough - analyze the entire document for scattered information
+5. If the business name is not explicitly stated, try to infer it from:
+   - Document headers, footers, or metadata
+   - Company references in the text
+   - Email domains or contact information
+   
 Return ONLY valid JSON in this exact format:
 {
   "businessName": "...",
