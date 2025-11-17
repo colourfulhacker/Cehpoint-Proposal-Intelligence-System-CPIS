@@ -7,9 +7,10 @@ import { ServiceRecommendation, ProjectBlueprint, ServiceCategory } from '@/type
 import { 
   Sparkles, Target, DollarSign, Clock, TrendingUp, 
   Shield, Cpu, Cloud, Zap, Brain, Building, LogOut,
-  MessageCircle, Phone, Mail, CheckCircle, Award, Users
+  MessageCircle, Phone, Mail, CheckCircle, Award, Users, Download, Send
 } from 'lucide-react';
 import toast, { Toaster } from 'react-hot-toast';
+import { downloadProposal, submitToCehpoint } from '@/lib/proposalGenerator';
 
 const categoryIcons: Record<ServiceCategory, any> = {
   'Process Automation & Optimization': Zap,
@@ -62,6 +63,27 @@ export default function Dashboard() {
       toast.success('Logged out successfully');
       router.push('/login');
     }
+  };
+
+  const handleDownloadProposal = () => {
+    try {
+      downloadProposal({
+        companyName: user?.companyName || 'Your Company',
+        recommendations,
+        blueprint,
+        generatedDate: new Date().toISOString()
+      });
+      toast.success('Proposal downloaded successfully! Open the HTML file to view or print as PDF.');
+    } catch (error) {
+      toast.error('Failed to download proposal. Please try again.');
+      console.error(error);
+    }
+  };
+
+  const handleSubmitToCehpoint = () => {
+    const url = submitToCehpoint(user?.companyName || 'Potential Client', recommendations);
+    window.open(url, '_blank');
+    toast.success('Opening WhatsApp to connect with Cehpoint team!');
   };
 
   const filteredRecommendations = selectedCategory === 'All' 
@@ -137,6 +159,41 @@ export default function Dashboard() {
             </div>
           </div>
           
+          
+          <div className="mt-6 pt-6 border-t border-gray-200">
+            <div className="bg-gradient-to-br from-green-50 to-emerald-50 rounded-xl p-6 border-2 border-green-200 mb-6">
+              <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
+                <div className="flex-1">
+                  <h3 className="text-lg font-bold text-gray-900 mb-2 flex items-center gap-2">
+                    <CheckCircle className="w-5 h-5 text-green-600" />
+                    Ready to Move Forward?
+                  </h3>
+                  <p className="text-sm text-gray-700">
+                    Download your comprehensive proposal or connect with our team to discuss implementation.
+                  </p>
+                </div>
+                <div className="flex flex-wrap gap-3 w-full md:w-auto">
+                  <Button 
+                    onClick={handleDownloadProposal}
+                    variant="secondary"
+                    className="bg-blue-600 hover:bg-blue-700 text-white flex-1 md:flex-initial"
+                  >
+                    <Download className="w-4 h-4" />
+                    Download Proposal
+                  </Button>
+                  <Button 
+                    onClick={handleSubmitToCehpoint}
+                    variant="primary"
+                    className="bg-green-600 hover:bg-green-700 text-white flex-1 md:flex-initial"
+                  >
+                    <Send className="w-4 h-4" />
+                    Submit to Cehpoint
+                  </Button>
+                </div>
+              </div>
+            </div>
+          </div>
+
           <div className="grid md:grid-cols-3 gap-6 pt-6 border-t border-gray-200">
             <div className="flex items-start gap-3">
               <div className="bg-blue-100 p-2 rounded-lg">
