@@ -535,7 +535,7 @@ export default function Home() {
                 <a href="https://wa.me/919091156095" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-green-500 transition-colors" title="WhatsApp">
                   <MessageCircle className="w-5 h-5" />
                 </a>
-                <a href="mailto:contact@cehpoint.com" className="text-gray-400 hover:text-blue-500 transition-colors" title="Email">
+                <a href="mailto:sales@cehpoint.co.in" className="text-gray-400 hover:text-blue-500 transition-colors" title="Email">
                   <Mail className="w-5 h-5" />
                 </a>
                 <a href="tel:+919091156095" className="text-gray-400 hover:text-indigo-500 transition-colors" title="Phone">
@@ -562,7 +562,7 @@ export default function Home() {
                 </li>
                 <li className="flex items-center gap-2">
                   <Mail className="w-4 h-4" />
-                  <span>contact@cehpoint.com</span>
+                  <span>sales@cehpoint.co.in</span>
                 </li>
                 <li className="flex items-center gap-2">
                   <MessageCircle className="w-4 h-4" />

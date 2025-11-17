@@ -486,7 +486,7 @@ export default function Dashboard() {
                   <Mail className="w-8 h-8" />
                 </div>
                 <p className="font-semibold mb-1">Email</p>
-                <p className="text-sm text-indigo-100">contact@cehpoint.com</p>
+                <p className="text-sm text-indigo-100">sales@cehpoint.co.in</p>
               </div>
               <div className="text-center">
                 <div className="bg-white bg-opacity-20 rounded-lg p-4 mb-3 inline-block">
