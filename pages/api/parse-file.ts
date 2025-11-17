@@ -37,7 +37,9 @@ export default async function handler(
       const dataBuffer = fs.readFileSync(filePath);
       // eslint-disable-next-line
       const pdfParse = require('pdf-parse');
-      const data = await pdfParse(dataBuffer);
+      // Handle both CommonJS and ES module exports
+      const parser = pdfParse.default || pdfParse;
+      const data = await parser(dataBuffer);
       content = data.text;
       
       if (!content || content.trim().length === 0) {
