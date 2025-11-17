@@ -5,10 +5,11 @@ interface ProposalData {
   recommendations: ServiceRecommendation[];
   blueprint: ProjectBlueprint | null;
   generatedDate: string;
+  salesNotes?: string;
 }
 
 export function generateProposalHTML(data: ProposalData): string {
-  const { companyName, recommendations, blueprint, generatedDate } = data;
+  const { companyName, recommendations, blueprint, generatedDate, salesNotes } = data;
   
   const totalEstimate = recommendations.reduce((sum, rec) => {
     const price = typeof rec.estimatedCost === 'string' 
@@ -310,11 +311,9 @@ export function generateProposalHTML(data: ProposalData): string {
 
     <div class="content">
       <div class="intro">
-        <h3>About This Proposal</h3>
+        <h3>${salesNotes ? 'Personal Message from Your Consultant' : 'About This Proposal'}</h3>
         <p>
-          This comprehensive technology solutions proposal has been generated using AI-powered analysis 
-          of your business operations and requirements. Each recommendation is tailored to your specific 
-          needs and designed to deliver measurable ROI.
+          ${salesNotes || 'This comprehensive technology solutions proposal has been generated using AI-powered analysis of your business operations and requirements. Each recommendation is tailored to your specific needs and designed to deliver measurable ROI.'}
         </p>
       </div>
 
@@ -459,20 +458,22 @@ export function downloadProposal(data: ProposalData): void {
   URL.revokeObjectURL(url);
 }
 
-export function submitToCehpoint(companyName: string, recommendations: ServiceRecommendation[]): string {
+export function submitToCehpoint(companyName: string, recommendations: ServiceRecommendation[], salesNotes?: string): string {
   const highPriority = recommendations.filter(r => r.priority === 'High');
   const topRecommendations = highPriority.slice(0, 3).map(r => r.title).join(', ');
   
-  const message = `Hi Cehpoint Team,
-
-I'm interested in the technology solutions proposal for ${companyName}.
+  let message = `Hi! Sharing the technology solutions proposal for ${companyName}.
 
 Summary:
 • Total Solutions: ${recommendations.length}
 • High Priority: ${highPriority.length}
-• Top Recommendations: ${topRecommendations || recommendations.slice(0, 2).map(r => r.title).join(', ')}
+• Top Recommendations: ${topRecommendations || recommendations.slice(0, 2).map(r => r.title).join(', ')}`;
 
-I'd like to schedule a consultation to discuss implementation, timelines, and pricing.
+  if (salesNotes) {
+    message += `\n\nPersonal Note:\n${salesNotes}`;
+  }
+  
+  message += `\n\nI'd like to schedule a consultation to discuss implementation, timelines, and pricing.
 
 Looking forward to connecting!`;
 

@@ -36,6 +36,9 @@ export default function Dashboard() {
   const [blueprint, setBlueprint] = useState<ProjectBlueprint | null>(null);
   const [selectedCategory, setSelectedCategory] = useState<ServiceCategory | 'All'>('All');
   const [user, setUser] = useState<any>(null);
+  const [editMode, setEditMode] = useState(false);
+  const [salesNotes, setSalesNotes] = useState('');
+  const [excludedIds, setExcludedIds] = useState<string[]>([]);
 
   useEffect(() => {
     if (!isAuthenticated()) {
@@ -67,11 +70,13 @@ export default function Dashboard() {
 
   const handleDownloadProposal = () => {
     try {
+      const includedRecs = recommendations.filter(r => !excludedIds.includes(r.id));
       downloadProposal({
         companyName: user?.companyName || 'Your Company',
-        recommendations,
+        recommendations: includedRecs,
         blueprint,
-        generatedDate: new Date().toISOString()
+        generatedDate: new Date().toISOString(),
+        salesNotes: salesNotes || undefined
       });
       toast.success('Proposal downloaded successfully! Open the HTML file to view or print as PDF.');
     } catch (error) {
@@ -81,9 +86,18 @@ export default function Dashboard() {
   };
 
   const handleSubmitToCehpoint = () => {
-    const url = submitToCehpoint(user?.companyName || 'Potential Client', recommendations);
+    const includedRecs = recommendations.filter(r => !excludedIds.includes(r.id));
+    const url = submitToCehpoint(user?.companyName || 'Potential Client', includedRecs, salesNotes);
     window.open(url, '_blank');
-    toast.success('Opening WhatsApp to connect with Cehpoint team!');
+    toast.success('Opening WhatsApp to share proposal!');
+  };
+
+  const toggleRecommendation = (id: string) => {
+    setExcludedIds(prev => 
+      prev.includes(id) 
+        ? prev.filter(excludedId => excludedId !== id)
+        : [...prev, id]
+    );
   };
 
   const filteredRecommendations = selectedCategory === 'All' 
@@ -116,11 +130,19 @@ export default function Dashboard() {
             </div>
             <div className="flex gap-2 md:gap-3 flex-wrap">
               <Button 
+                variant="primary" 
+                onClick={() => router.push('/discovery')}
+                className="bg-green-600 hover:bg-green-700 text-white text-sm md:text-base"
+              >
+                <Users className="w-4 h-4" />
+                New Client Proposal
+              </Button>
+              <Button 
                 variant="outline" 
                 onClick={() => window.open('https://portfolios.cehpoint.co.in/', '_blank')}
                 className="text-blue-600 border-blue-600 hover:bg-blue-600 hover:text-white text-sm md:text-base"
               >
-                View Projects Portfolio
+                View Portfolio
               </Button>
               <Button variant="outline" onClick={handleLogout} className="text-sm md:text-base">
                 <LogOut className="w-4 h-4" />
@@ -159,6 +181,62 @@ export default function Dashboard() {
             </div>
           </div>
           
+          {editMode && (
+            <div className="mt-6 p-6 bg-gradient-to-r from-orange-50 to-yellow-50 border-2 border-orange-300 rounded-xl">
+              <div className="flex items-start gap-4 mb-4">
+                <div className="w-12 h-12 bg-orange-600 rounded-xl flex items-center justify-center flex-shrink-0">
+                  <Sparkles className="w-6 h-6 text-white" />
+                </div>
+                <div className="flex-1">
+                  <h3 className="text-lg font-bold text-gray-900 mb-2">✏️ Customization Mode Active</h3>
+                  <p className="text-sm text-gray-700 mb-4">
+                    Add personalized notes and select which solutions to include. Use the checkboxes on each recommendation below to customize your proposal.
+                  </p>
+                  <div className="bg-white rounded-lg p-4 border-2 border-orange-200 mb-4">
+                    <label className="block text-sm font-semibold text-gray-700 mb-2">
+                      Sales Notes / Custom Message (will appear at top of proposal)
+                    </label>
+                    <textarea
+                      value={salesNotes}
+                      onChange={(e) => setSalesNotes(e.target.value)}
+                      placeholder="Example: 'Hi [Client Name], based on our discussion, I've highlighted these key solutions that will help you achieve [specific goal]. Let's discuss implementation timeline and any questions you might have.'"
+                      className="w-full h-32 px-4 py-3 border-2 border-gray-200 rounded-lg focus:border-orange-500 focus:ring-2 focus:ring-orange-200 text-gray-800 resize-none"
+                    />
+                    <p className="text-xs text-gray-500 mt-2">💡 Tip: Personalize this message to make the proposal more engaging for your client!</p>
+                  </div>
+                  <div className="bg-white rounded-lg p-4 border-2 border-blue-200">
+                    <div className="flex items-center justify-between mb-3">
+                      <label className="block text-sm font-semibold text-gray-700">
+                        📋 Proposal Summary
+                      </label>
+                      <div className="text-sm">
+                        <span className="font-bold text-blue-600">{recommendations.length - excludedIds.length}</span>
+                        <span className="text-gray-600"> of {recommendations.length} solutions selected</span>
+                      </div>
+                    </div>
+                    {excludedIds.length > 0 && (
+                      <div className="bg-gray-50 rounded p-3">
+                        <p className="text-xs font-semibold text-gray-700 mb-2">Excluded Solutions:</p>
+                        <div className="space-y-1">
+                          {recommendations.filter(r => excludedIds.includes(r.id)).map(r => (
+                            <div key={r.id} className="flex items-center justify-between text-xs">
+                              <span className="text-gray-600">{r.title}</span>
+                              <button
+                                onClick={() => toggleRecommendation(r.id)}
+                                className="text-blue-600 hover:text-blue-700 font-medium"
+                              >
+                                Re-include
+                              </button>
+                            </div>
+                          ))}
+                        </div>
+                      </div>
+                    )}
+                  </div>
+                </div>
+              </div>
+            </div>
+          )}
           
           <div className="mt-6 pt-6 border-t border-gray-200">
             <div className="bg-gradient-to-br from-green-50 to-emerald-50 rounded-xl p-6 border-2 border-green-200 mb-6">
@@ -166,20 +244,30 @@ export default function Dashboard() {
                 <div className="flex-1">
                   <h3 className="text-lg font-bold text-gray-900 mb-2 flex items-center gap-2">
                     <CheckCircle className="w-5 h-5 text-green-600" />
-                    Ready to Move Forward?
+                    Sales Actions
                   </h3>
                   <p className="text-sm text-gray-700">
-                    Download your comprehensive proposal or connect with our team to discuss implementation.
+                    Review, customize, and share this proposal with your client. Perfect for live demos and meetings.
                   </p>
                 </div>
                 <div className="flex flex-wrap gap-3 w-full md:w-auto">
+                  <Button 
+                    onClick={() => {
+                      setEditMode(!editMode);
+                      toast.success(editMode ? 'Preview mode enabled' : 'Edit mode enabled - customize for your client!');
+                    }}
+                    variant={editMode ? 'secondary' : 'outline'}
+                    className={editMode ? 'bg-orange-600 hover:bg-orange-700 text-white flex-1 md:flex-initial' : 'flex-1 md:flex-initial'}
+                  >
+                    {editMode ? '👁️ Preview' : '✏️ Customize'}
+                  </Button>
                   <Button 
                     onClick={handleDownloadProposal}
                     variant="secondary"
                     className="bg-blue-600 hover:bg-blue-700 text-white flex-1 md:flex-initial"
                   >
                     <Download className="w-4 h-4" />
-                    Download Proposal
+                    Download
                   </Button>
                   <Button 
                     onClick={handleSubmitToCehpoint}
@@ -187,7 +275,7 @@ export default function Dashboard() {
                     className="bg-green-600 hover:bg-green-700 text-white flex-1 md:flex-initial"
                   >
                     <Send className="w-4 h-4" />
-                    Submit to Cehpoint
+                    Share via WhatsApp
                   </Button>
                 </div>
               </div>
@@ -259,7 +347,20 @@ export default function Dashboard() {
           {filteredRecommendations.map((rec) => {
             const Icon = categoryIcons[rec.category];
             return (
-              <Card key={rec.id} hover>
+              <Card key={rec.id} hover className={excludedIds.includes(rec.id) ? 'opacity-50 border-2 border-gray-300' : ''}>
+                {editMode && (
+                  <div className="mb-4 flex items-center gap-3 p-3 bg-orange-50 rounded-lg border border-orange-200">
+                    <input
+                      type="checkbox"
+                      checked={!excludedIds.includes(rec.id)}
+                      onChange={() => toggleRecommendation(rec.id)}
+                      className="w-5 h-5 text-blue-600 rounded focus:ring-2 focus:ring-blue-500"
+                    />
+                    <label className="text-sm font-semibold text-gray-800 cursor-pointer" onClick={() => toggleRecommendation(rec.id)}>
+                      {excludedIds.includes(rec.id) ? '❌ Excluded from proposal' : '✅ Included in proposal'}
+                    </label>
+                  </div>
+                )}
                 <div className="flex items-start justify-between mb-4">
                   <div className="flex items-start gap-4">
                     <div className={`w-12 h-12 rounded-lg bg-gradient-to-r ${categoryColors[rec.category]} flex items-center justify-center flex-shrink-0`}>
