@@ -87,6 +87,27 @@ Uses Google Gemini to:
 
 ## Recent Changes
 
+### November 17, 2025 - Masterpiece UX: Trust Signals, Global Contact & Mobile Optimization
+
+**Trust & Credibility Enhancements:**
+- ✅ Added client testimonials section with 3 credible success stories (FinTech, E-commerce, SaaS)
+- ✅ Added comprehensive FAQ section with 5 key questions (pricing, timelines, international clients, differentiation, support)
+- ✅ Enhanced footer with global contact options (Email, Phone, WhatsApp, Time Zones)
+- ✅ Added professional privacy/terms links in footer
+- ✅ Improved footer messaging to emphasize global reach: "500+ clients across 40+ countries"
+
+**UX & Mobile Improvements:**
+- ✅ Added logout confirmation dialog to prevent accidental logout
+- ✅ Optimized mobile responsiveness: hero stats grid (2 cols mobile, 4 cols desktop)
+- ✅ Fixed questionnaire sidebar overflow with max-height and scroll
+- ✅ Made dashboard buttons responsive with flex-wrap and smaller text on mobile
+- ✅ All trust elements (testimonials, FAQ, certifications) properly styled for mobile
+
+**Technical Fixes:**
+- ✅ Fixed missing icon imports (Mail, Phone, Clock) in homepage
+- ✅ All sections verified rendering correctly via curl tests
+- ✅ No LSP errors or build issues
+
 ### November 17, 2025 - Multi-Currency Support & Standardized Pricing
 
 **Global Positioning & Sample Portfolio:**
