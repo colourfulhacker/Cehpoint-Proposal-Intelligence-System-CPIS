@@ -87,6 +87,23 @@ Uses Google Gemini to:
 
 ## Recent Changes
 
+### November 17, 2025 - Multi-Currency Support & Standardized Pricing
+
+**Global Positioning & Sample Portfolio:**
+- ✅ Changed messaging from "for Indian Businesses" to "for Growing Businesses Worldwide"
+- ✅ Added multi-currency pricing throughout (USD / INR / EUR) on all pages
+- ✅ Integrated "View Sample Project" button linking to https://portfolios.cehpoint.co.in/
+- ✅ Updated pricing section to emphasize global reach with "Multi-currency support"
+- ✅ Changed stats from "₹25K+" to "$300+" for international appeal
+- ✅ Modified questionnaire sidebar pricing message to show multi-currency
+
+**AI Recommendations Pricing Standardization:**
+- ✅ Updated Gemini API prompts to generate pricing between ₹10,000 - ₹95,000
+- ✅ All AI-generated recommendations now include USD equivalent in brackets
+- ✅ Format: "₹[amount] ($[usd_amount])" using ~₹83 = $1 conversion
+- ✅ Project blueprint total costs also follow same ₹10,000-₹95,000 range
+- ✅ Ensures affordable, competitive pricing for all clients
+
 ### November 16, 2025 - Production-Ready Platform with Robust Validation & Multi-Select Regions
 
 **Professional Dashboard & WhatsApp Integration:**

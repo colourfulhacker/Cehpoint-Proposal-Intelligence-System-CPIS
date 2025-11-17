@@ -80,13 +80,19 @@ For EACH recommendation, provide:
 - expectedROI: Expected return on investment or value
 - priority: High, Medium, or Low based on urgency and impact
 - estimatedTimeline: Realistic timeline (e.g., "2-3 months", "4-6 weeks")
-- estimatedCost: Budget range (e.g., "Low ($5-15K)", "Medium ($15-50K)", "High ($50K+)")
+- estimatedCost: MUST be in the range ₹10,000 to ₹95,000 with USD in brackets. Format examples: "₹15,000 ($180)", "₹45,000 ($540)", "₹85,000 ($1,020)"
 
 Also create a high-level PROJECT BLUEPRINT with:
 - deliverables: Array of 4-6 key deliverables
 - timeline: Overall timeline (e.g., "3-6 months")
-- costBracket: Overall cost estimate
+- costBracket: Total project cost in range ₹10,000 to ₹95,000 with USD in brackets (e.g., "₹65,000 ($780)")
 - phases: Array of 3-5 project phases with name, duration, and description
+
+IMPORTANT PRICING GUIDELINES:
+- All recommendations MUST have estimatedCost between ₹10,000 and ₹95,000
+- ALWAYS include USD equivalent in brackets (convert at ~₹83 = $1)
+- Format: "₹[amount] ($[usd_amount])" - e.g., "₹25,000 ($300)", "₹70,000 ($840)"
+- Project blueprint costBracket should be the sum of top priority recommendations, also in ₹10,000-₹95,000 range
 
 Make recommendations unique, specific to their industry, challenges, and goals. Avoid generic advice. Focus on high-value, hard-to-ignore solutions.
 
