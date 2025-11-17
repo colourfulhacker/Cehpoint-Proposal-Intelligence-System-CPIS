@@ -58,3 +58,56 @@ a {
 * {
   box-sizing: border-box;
 }
+
+/* Smooth page transitions - reduced duration to minimize layout shift */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.page-transition {
+  animation: fadeIn 0.15s ease-out;
+}
+
+/* Enhanced focus styles for accessibility */
+*:focus-visible {
+  outline: 2px solid #2563eb;
+  outline-offset: 2px;
+}
+
+/* Removed global smooth-scroll to prevent modal/nested scroll issues */
+
+/* Loading skeleton animation */
+@keyframes shimmer {
+  0% {
+    background-position: -1000px 0;
+  }
+  100% {
+    background-position: 1000px 0;
+  }
+}
+
+.skeleton {
+  background: linear-gradient(
+    90deg,
+    #f3f4f6 0%,
+    #e5e7eb 20%,
+    #f3f4f6 40%,
+    #f3f4f6 100%
+  );
+  background-size: 1000px 100%;
+  animation: shimmer 2s linear infinite;
+}
+
+/* Improved button interactions */
+button, a {
+  transition: all 0.2s ease-in-out;
+}
+
+button:active, a:active {
+  transform: scale(0.98);
+}

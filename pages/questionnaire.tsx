@@ -7,7 +7,7 @@ import MultiSelect from '@/components/MultiSelect';
 import Card from '@/components/Card';
 import { isAuthenticated, saveSession, getSession, getUser, saveQuestionnaireDraft, getQuestionnaireDraft, clearQuestionnaireDraft } from '@/lib/storage';
 import { BusinessProfile } from '@/types';
-import { ArrowRight, ArrowLeft, Sparkles, Check, Cloud, Shield, Zap, Brain, Target, Lock, Database, Workflow, Lightbulb, TrendingUp, MessageCircle } from 'lucide-react';
+import { ArrowRight, ArrowLeft, Sparkles, Check, Cloud, Shield, Zap, Brain, Target, Lock, Database, Workflow, Lightbulb, TrendingUp, MessageCircle, CheckCircle } from 'lucide-react';
 import toast, { Toaster } from 'react-hot-toast';
 
 export default function Questionnaire() {
@@ -475,7 +475,7 @@ export default function Questionnaire() {
   const progressPercentage = Math.round(((currentSection + 1) / sections.length) * 100);
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 via-indigo-50 to-purple-50">
+    <div className="min-h-screen bg-gradient-to-br from-blue-50 via-indigo-50 to-purple-50 page-transition">
       <Toaster position="top-right" />
       
       <div className="container mx-auto px-4 py-8 md:py-12">
@@ -704,34 +704,76 @@ export default function Questionnaire() {
                       </div>
                     </div>
                   ) : (
-                    <div className="text-center py-8">
-                      <div className="w-16 h-16 bg-gray-100 rounded-full flex items-center justify-center mx-auto mb-3">
-                        <Sparkles className="w-8 h-8 text-gray-400" />
+                    <div className="text-center py-6">
+                      <div className="w-16 h-16 bg-gradient-to-br from-blue-100 to-indigo-100 rounded-full flex items-center justify-center mx-auto mb-3">
+                        <Sparkles className="w-8 h-8 text-indigo-600" />
                       </div>
-                      <p className="text-sm text-gray-500">
+                      <p className="text-sm text-gray-700 font-medium mb-4">
                         Start filling out the form to see personalized AI recommendations
                       </p>
+                      <div className="bg-blue-50 rounded-lg p-4 border border-blue-100">
+                        <p className="text-xs text-blue-900 font-semibold mb-1">💡 Did you know?</p>
+                        <p className="text-xs text-blue-800">
+                          Companies using our solutions see an average 40% cost reduction in their first year
+                        </p>
+                      </div>
                     </div>
                   )}
 
-                  <div className="mt-6 p-4 bg-green-50 rounded-lg border border-green-200">
-                    <div className="flex items-start gap-2">
-                      <MessageCircle className="w-5 h-5 text-green-600 flex-shrink-0 mt-0.5" />
-                      <div>
-                        <h4 className="font-semibold text-green-900 text-sm mb-1">
-                          Need Help?
+                  {/* Encouraging Progress Facts */}
+                  <div className="mt-6 space-y-3">
+                    <div className="p-3 bg-gradient-to-r from-green-50 to-emerald-50 rounded-lg border border-green-200">
+                      <div className="flex items-start gap-2">
+                        <CheckCircle className="w-4 h-4 text-green-600 flex-shrink-0 mt-0.5" />
+                        <div>
+                          <p className="text-xs text-green-900 font-semibold">✓ Free Consultation</p>
+                          <p className="text-xs text-green-800">No commitment required - get expert advice first</p>
+                        </div>
+                      </div>
+                    </div>
+                    
+                    <div className="p-3 bg-gradient-to-r from-blue-50 to-indigo-50 rounded-lg border border-blue-200">
+                      <div className="flex items-start gap-2">
+                        <TrendingUp className="w-4 h-4 text-blue-600 flex-shrink-0 mt-0.5" />
+                        <div>
+                          <p className="text-xs text-blue-900 font-semibold">📊 Proven ROI</p>
+                          <p className="text-xs text-blue-800">95% of clients achieve positive ROI within 6 months</p>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div className="p-3 bg-gradient-to-r from-purple-50 to-pink-50 rounded-lg border border-purple-200">
+                      <div className="flex items-start gap-2">
+                        <Target className="w-4 h-4 text-purple-600 flex-shrink-0 mt-0.5" />
+                        <div>
+                          <p className="text-xs text-purple-900 font-semibold">🎯 Affordable Pricing</p>
+                          <p className="text-xs text-purple-800">Starting from just ₹25,000 - EMI options available</p>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Enhanced WhatsApp Contact */}
+                  <div className="mt-6 p-4 bg-gradient-to-r from-green-50 to-green-100 rounded-xl border-2 border-green-300 shadow-sm hover:shadow-md transition-shadow">
+                    <div className="flex items-start gap-3">
+                      <div className="w-10 h-10 bg-green-600 rounded-full flex items-center justify-center flex-shrink-0">
+                        <MessageCircle className="w-5 h-5 text-white" />
+                      </div>
+                      <div className="flex-1">
+                        <h4 className="font-bold text-green-900 text-sm mb-1">
+                          💬 Need Help? Chat Instantly!
                         </h4>
-                        <p className="text-xs text-green-800 mb-2">
-                          Chat with us on WhatsApp for instant support
+                        <p className="text-xs text-green-800 mb-3 font-medium">
+                          Our team responds within 5 minutes on WhatsApp
                         </p>
                         <a
-                          href="https://wa.me/919091156095"
+                          href="https://wa.me/919091156095?text=Hi%2C%20I%27m%20filling%20the%20questionnaire%20and%20need%20help%20with%20section%20{currentSection + 1}"
                           target="_blank"
                           rel="noopener noreferrer"
-                          className="inline-flex items-center gap-1 text-xs font-semibold text-green-700 hover:text-green-900"
+                          className="inline-flex items-center gap-2 px-4 py-2 bg-green-600 text-white text-xs font-bold rounded-lg hover:bg-green-700 transition-all shadow-md hover:shadow-lg"
                         >
-                          <MessageCircle className="w-3 h-3" />
-                          Start Chat
+                          <MessageCircle className="w-4 h-4" />
+                          Chat with Expert Now
                         </a>
                       </div>
                     </div>

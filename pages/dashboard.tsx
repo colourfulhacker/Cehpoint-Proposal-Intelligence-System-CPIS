@@ -75,7 +75,7 @@ export default function Dashboard() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 via-indigo-50 to-purple-50">
+    <div className="min-h-screen bg-gradient-to-br from-blue-50 via-indigo-50 to-purple-50 page-transition">
       <Toaster position="top-right" />
       
       <div className="bg-white shadow-sm border-b">
@@ -87,7 +87,7 @@ export default function Dashboard() {
                 <h1 className="text-2xl font-bold bg-gradient-to-r from-blue-600 to-indigo-600 bg-clip-text text-transparent">
                   Cehpoint
                 </h1>
-                <p className="text-sm text-gray-600">{user?.companyName}</p>
+                <p className="text-sm text-gray-600">{user?.companyName || 'Guest'}</p>
               </div>
             </div>
             <Button variant="outline" onClick={handleLogout}>
@@ -110,7 +110,7 @@ export default function Dashboard() {
                 Technology Solutions Portfolio
               </h2>
               <p className="text-lg text-gray-600 mb-2">
-                Tailored for <span className="font-semibold text-indigo-700">{user?.companyName}</span>
+                Tailored for <span className="font-semibold text-indigo-700">{user?.companyName || 'your business'}</span>
               </p>
               <p className="text-sm text-gray-500">
                 Based on comprehensive business analysis and industry best practices
@@ -246,48 +246,77 @@ export default function Dashboard() {
                     <p className="text-sm font-medium text-gray-800">{rec.estimatedTimeline}</p>
                   </div>
 
-                  <div>
+                  <div className="bg-gradient-to-br from-green-50 to-emerald-50 p-3 rounded-lg border-2 border-green-300">
                     <div className="flex items-center gap-2 mb-1">
-                      <DollarSign className="w-4 h-4 text-gray-500" />
-                      <span className="text-xs font-semibold text-gray-500 uppercase">Investment</span>
+                      <DollarSign className="w-4 h-4 text-green-600" />
+                      <span className="text-xs font-bold text-green-800 uppercase">Affordable Pricing</span>
                     </div>
-                    <p className="text-sm font-medium text-gray-800">{rec.estimatedCost}</p>
+                    <p className="text-sm font-bold text-green-900">{rec.estimatedCost}</p>
+                    <p className="text-xs text-green-700 mt-1">EMI options available</p>
                   </div>
                 </div>
 
-                <div className="mt-4 bg-purple-50 p-3 rounded-lg">
-                  <div className="flex items-center gap-2 mb-1">
-                    <DollarSign className="w-4 h-4 text-purple-600" />
-                    <span className="text-xs font-semibold text-purple-800 uppercase">Expected ROI</span>
+                <div className="mt-4 bg-gradient-to-r from-purple-50 to-pink-50 p-4 rounded-lg border-2 border-purple-200">
+                  <div className="flex items-center justify-between">
+                    <div>
+                      <div className="flex items-center gap-2 mb-1">
+                        <DollarSign className="w-5 h-5 text-purple-600" />
+                        <span className="text-xs font-bold text-purple-800 uppercase">Expected ROI</span>
+                      </div>
+                      <p className="text-sm text-purple-900 font-bold">{rec.expectedROI}</p>
+                    </div>
+                    <div className="text-right">
+                      <p className="text-xs text-purple-700 font-semibold">✓ Free Consultation</p>
+                      <p className="text-xs text-purple-700">✓ No Hidden Costs</p>
+                    </div>
                   </div>
-                  <p className="text-sm text-purple-900 font-medium">{rec.expectedROI}</p>
                 </div>
 
                 <div className="mt-6 pt-6 border-t border-gray-200">
+                  <div className="bg-gradient-to-r from-green-50 to-emerald-50 p-4 rounded-xl border-2 border-green-200 mb-4">
+                    <div className="flex items-center gap-2 mb-2">
+                      <MessageCircle className="w-5 h-5 text-green-600" />
+                      <h4 className="font-bold text-green-900">💬 Let's Discuss Your Solution</h4>
+                    </div>
+                    <p className="text-sm text-green-800 mb-3">
+                      Connect instantly on WhatsApp - Our team responds within <span className="font-bold">5 minutes</span>
+                    </p>
+                  </div>
+                  
                   <div className="flex flex-col sm:flex-row gap-3">
                     <a
-                      href={`https://wa.me/919091156095?text=Hi%2C%20I%27m%20interested%20in%20learning%20more%20about%20${encodeURIComponent(rec.title)}%20for%20${encodeURIComponent(user?.companyName || 'my business')}.%20Can%20we%20discuss%20the%20implementation%20details%3F`}
+                      href={`https://wa.me/919091156095?text=Hi!%20I%27m%20interested%20in%20${encodeURIComponent(rec.title)}%20for%20${encodeURIComponent(user?.companyName || 'my business')}.%0A%0ACan%20you%20provide%3A%0A1.%20Detailed%20breakdown%20of%20${rec.estimatedCost}%0A2.%20EMI%20payment%20options%0A3.%20Implementation%20timeline%0A4.%20Success%20stories`}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="flex-1 flex items-center justify-center gap-2 bg-gradient-to-r from-green-500 to-green-600 hover:from-green-600 hover:to-green-700 text-white font-semibold py-3 px-6 rounded-lg transition-all shadow-md hover:shadow-lg"
+                      className="flex-1 flex items-center justify-center gap-2 bg-gradient-to-r from-green-500 to-green-600 hover:from-green-600 hover:to-green-700 text-white font-bold py-4 px-6 rounded-lg transition-all shadow-lg hover:shadow-xl"
                     >
                       <MessageCircle className="w-5 h-5" />
-                      Discuss This Solution on WhatsApp
+                      Chat on WhatsApp - Get Instant Quote
                     </a>
                     <a
-                      href={`https://wa.me/919091156095?text=Hi%2C%20I%20need%20a%20detailed%20quote%20for%20${encodeURIComponent(rec.title)}.%20Company%3A%20${encodeURIComponent(user?.companyName || 'N/A')}`}
+                      href={`https://wa.me/919091156095?text=Hi%2C%20I%20need%20pricing%20details%20for%20${encodeURIComponent(rec.title)}.%20Company%3A%20${encodeURIComponent(user?.companyName || 'N/A')}%0A%0APlease%20share%20payment%20plans%20and%20discounts.`}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="flex items-center justify-center gap-2 bg-white hover:bg-gray-50 text-gray-700 font-semibold py-3 px-6 rounded-lg border-2 border-gray-300 transition-all"
+                      className="flex items-center justify-center gap-2 bg-white hover:bg-gray-900 hover:text-white text-gray-900 font-bold py-4 px-6 rounded-lg border-2 border-gray-900 transition-all shadow-md hover:shadow-lg"
                     >
-                      <Phone className="w-5 h-5" />
-                      Request Quote
+                      <DollarSign className="w-5 h-5" />
+                      Get Detailed Pricing
                     </a>
                   </div>
-                  <p className="text-xs text-gray-500 text-center mt-3">
-                    <MessageCircle className="w-3 h-3 inline mr-1" />
-                    Our consultants typically respond within 2 hours during business hours
-                  </p>
+                  <div className="mt-4 flex items-center justify-center gap-4 text-xs">
+                    <span className="flex items-center gap-1 text-green-700 font-semibold">
+                      <CheckCircle className="w-4 h-4" />
+                      5 min response time
+                    </span>
+                    <span className="flex items-center gap-1 text-blue-700 font-semibold">
+                      <CheckCircle className="w-4 h-4" />
+                      Free consultation
+                    </span>
+                    <span className="flex items-center gap-1 text-purple-700 font-semibold">
+                      <CheckCircle className="w-4 h-4" />
+                      EMI available
+                    </span>
+                  </div>
                 </div>
               </Card>
             );
@@ -408,6 +437,20 @@ export default function Dashboard() {
           </Button>
         </div>
       </div>
+
+      {/* Floating Sticky WhatsApp Button */}
+      <a
+        href={`https://wa.me/919091156095?text=Hi!%20I%27m%20reviewing%20my%20Cehpoint%20solutions%20portfolio%20for%20${encodeURIComponent(user?.companyName || 'my business')}.%20I%20have%20some%20questions.`}
+        target="_blank"
+        rel="noopener noreferrer"
+        className="fixed bottom-6 right-6 bg-gradient-to-r from-green-500 to-green-600 hover:from-green-600 hover:to-green-700 text-white p-4 rounded-full shadow-2xl hover:shadow-3xl transition-all duration-300 z-50 flex items-center gap-3 group animate-pulse hover:animate-none"
+        title="Chat on WhatsApp - 5 min response time"
+      >
+        <MessageCircle className="w-6 h-6" />
+        <span className="hidden group-hover:inline-block font-bold text-sm whitespace-nowrap pr-2">
+          Chat Now - 5 min response!
+        </span>
+      </a>
     </div>
   );
 }

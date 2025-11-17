@@ -84,8 +84,9 @@ export default function MultiSelect({
                 <input
                   type="checkbox"
                   checked={value.includes(option.value)}
-                  onChange={() => {}}
-                  className="w-5 h-5 text-blue-600 rounded focus:ring-2 focus:ring-blue-500"
+                  onChange={() => {}} // Handled by parent onClick
+                  readOnly
+                  className="w-5 h-5 text-blue-600 rounded focus:ring-2 focus:ring-blue-500 cursor-pointer"
                 />
                 <span className={`text-gray-800 ${value.includes(option.value) ? 'font-semibold' : ''}`}>
                   {option.label}
@@ -96,13 +97,16 @@ export default function MultiSelect({
         )}
       </div>
 
+      {/* Hidden input for HTML5 form validation - required by browsers */}
       {required && value.length === 0 && (
         <input
           type="text"
           value=""
+          onChange={() => {}} // Required by React for controlled component
           required
           className="absolute opacity-0 pointer-events-none"
           tabIndex={-1}
+          aria-hidden="true"
         />
       )}
 
