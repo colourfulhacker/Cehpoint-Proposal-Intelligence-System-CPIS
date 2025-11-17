@@ -445,7 +445,7 @@ export default function Dashboard() {
                   <div className="bg-gradient-to-r from-green-50 to-emerald-50 p-4 rounded-xl border-2 border-green-200 mb-4">
                     <div className="flex items-center gap-2 mb-2">
                       <MessageCircle className="w-5 h-5 text-green-600" />
-                      <h4 className="font-bold text-green-900">💬 Let's Discuss Your Solution</h4>
+                      <h4 className="font-bold text-green-900">💬 Let&apos;s Discuss Your Solution</h4>
                     </div>
                     <p className="text-sm text-green-800 mb-3">
                       Connect instantly on WhatsApp - Our team responds within <span className="font-bold">5 minutes</span>

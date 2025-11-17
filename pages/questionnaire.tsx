@@ -491,12 +491,12 @@ export default function Questionnaire() {
                     ✅ Business Profile Loaded Successfully!
                   </h3>
                   <p className="text-sm text-green-800 mb-3">
-                    We've automatically extracted information from your uploaded document and pre-filled the questionnaire. The form below has been populated with your business details.
+                    We&apos;ve automatically extracted information from your uploaded document and pre-filled the questionnaire. The form below has been populated with your business details.
                   </p>
                   <div className="bg-white bg-opacity-60 rounded-lg p-3 border border-green-200">
                     <p className="text-xs text-green-900 font-semibold mb-1">📝 Please Review:</p>
                     <p className="text-xs text-green-800">
-                      Some fields may say "Not specified in document" - please update these with accurate information. Feel free to review and modify any pre-filled information to ensure accuracy.
+                      Some fields may say &quot;Not specified in document&quot; - please update these with accurate information. Feel free to review and modify any pre-filled information to ensure accuracy.
                     </p>
                   </div>
                 </div>

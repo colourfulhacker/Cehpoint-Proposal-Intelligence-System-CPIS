@@ -1,285 +1,166 @@
-# Cehpoint - AI-Powered Client Onboarding & Service Recommendation System
+# Cehpoint - AI-Powered Sales Platform
 
 ## Overview
-Cehpoint is an intelligent client onboarding platform that leverages Google Gemini AI to analyze business profiles and generate personalized IT service, cybersecurity, and automation recommendations. The system provides a consultative, data-driven approach to identifying technology solutions that match each client's unique business needs.
 
-**Built:** November 14, 2025
-**Tech Stack:** Next.js, TypeScript, Tailwind CSS, Google Gemini API
-**Current Status:** Fully functional MVP with complete user flow
+Cehpoint is a sales-focused proposal generation platform that transforms client onboarding into instant, customizable proposals powered by Google Gemini AI. Sales teams can upload client business profiles or use a comprehensive questionnaire to generate AI-powered technology recommendations, customize proposals, and export professional HTML documents or share via WhatsApp.
 
-## Project Purpose
-Transform business consulting by using AI to:
-- Analyze client business profiles comprehensively
-- Identify specific automation, security, and technology opportunities
-- Generate actionable, prioritized service recommendations
-- Provide clear business impact and ROI estimates
-- Create high-level project blueprints
+**Target Users:** Sales teams conducting client meetings  
+**Primary Goal:** Accelerate the sales process by automating proposal generation and customization
 
-## Architecture
+## Recent Updates (November 17, 2025)
 
-### Frontend (Next.js Pages Router)
-- **pages/index.tsx** - Landing page with overview
-- **pages/login.tsx** - Authentication/signup page
-- **pages/discovery.tsx** - Business profile upload and questionnaire selection
-- **pages/questionnaire.tsx** - 7-section smart questionnaire
-- **pages/dashboard.tsx** - Recommendations and project blueprint view
+### Production-Ready Cleanup ✅
+- Consolidated all documentation into comprehensive README.md
+- Fixed all ESLint errors (unescaped quotes/apostrophes)
+- Removed unused files (DEPLOYMENT.md, SUPABASE_INTEGRATION.md, styles/Home.module.css)
+- Verified production build succeeds with no errors
+- Kept Supabase scaffolding (auth-helpers.ts, supabase.ts.example) for future backend integration
+- Added detailed sales team access instructions in README.md
 
-### API Routes
-- **pages/api/analyze-profile.ts** - Analyzes questionnaire data with Gemini
-- **pages/api/analyze-document.ts** - Analyzes uploaded documents with Gemini
-- **pages/api/fetch-url.ts** - Fetches and extracts content from URLs
+### Sales Platform Features ✅
+- New Client Proposal button for easy client switching
+- Customization mode with recommendation toggles
+- Sales notes textarea with persistence
+- Proposal summary showing included/excluded solutions
+- Professional HTML export with sales notes
+- WhatsApp sharing with personalized messages
+- Cross-category exclusion management (re-include buttons)
 
-### Core Services
-- **lib/gemini.ts** - Gemini API integration for AI analysis
-- **lib/storage.ts** - Local storage management for sessions
-- **lib/fileParser.ts** - File parsing (PDF, DOCX, TXT)
+## System Architecture
 
-### Types
-- **types/index.ts** - TypeScript interfaces for all data structures
+### Frontend Architecture
 
-### UI Components
-- **components/Button.tsx** - Reusable button with variants
-- **components/Card.tsx** - Card container with hover effects
-- **components/Input.tsx** - Form input with label support
+**Framework:** Next.js 15.2 with TypeScript and React 19
+- **Pages Router:** Traditional Next.js routing for simplicity
+- **Component Structure:** Reusable UI components (Button, Card, Input, Select, MultiSelect)
+- **State Management:** React hooks (useState, useEffect) with localStorage for MVP
+- **Styling:** Tailwind CSS 4.0 with custom theme configuration
+- **Error Handling:** ErrorBoundary component for graceful error display
 
-## Key Features
+**Key Pages:**
+- `/` - Sign-in/sign-up interface
+- `/discovery` - File upload or questionnaire selection
+- `/questionnaire` - Multi-step form with 7 sections
+- `/dashboard` - AI-generated recommendations with customization tools
 
-### 1. Dual Onboarding Methods
-- **Upload Business Profile** - PDF, DOCX, TXT, or website URL
-- **Smart Questionnaire** - 7 comprehensive sections covering all business aspects
+### Backend Architecture
 
-### 2. AI-Powered Analysis
-Uses Google Gemini to:
-- Extract business information from uploaded documents
-- Analyze business challenges, goals, and technology status
-- Generate 6-12 personalized recommendations across 6 categories
-- Create project blueprints with phases, deliverables, and costs
+**Current State (MVP):** Serverless API routes with localStorage
+- **Data Storage:** Browser localStorage for sessions and recommendations
+- **API Routes:** Next.js API routes for file parsing, AI analysis, document generation
+- **File Processing:** Server-side parsing for PDF (pdf-parse), DOCX (mammoth), TXT
 
-### 3. Recommendation Categories
-1. Process Automation & Optimization
-2. Software Solutions
-3. Cybersecurity & Risk Reduction
-4. Technology Modernization
-5. AI & Intelligent Automation
-6. Industry-Specific Solutions
+**Migration Path to Supabase:**
+- Placeholder functions in `lib/auth-helpers.ts` (commented)
+- Example Supabase client in `lib/supabase.ts.example`
+- TODO comments throughout codebase indicating integration points
+- Full migration guide in README.md "Future Roadmap" section
 
-### 4. Rich Dashboard
-- Priority-based recommendations (High/Medium/Low)
-- Category filtering
-- Business impact and ROI display
-- Timeline and cost estimates
-- Project blueprint with phases
-- **Download Proposal** - Export comprehensive HTML proposal with all recommendations
-- **Submit to Cehpoint** - Connect via WhatsApp with pre-filled inquiry
+### AI Integration (Google Gemini)
 
-## User Flow
+**Primary Service:** Google Gemini AI via `@google/genai` SDK
 
-1. **Landing Page** → User sees overview and value proposition
-2. **Sign Up/Login** → Simple authentication with email
-3. **Discovery** → Choose upload or questionnaire
-4. **Analysis** → AI processes business information
-5. **Dashboard** → View personalized recommendations and blueprint
+**Core AI Functions:**
+1. **Document Analysis** (`/api/analyze-document`): Extracts business information from uploaded files
+2. **Profile Analysis** (`/api/analyze-profile`): Generates 6-12 technology recommendations
+3. **Live Suggestions** (`/api/get-live-suggestions`): Real-time suggestions during questionnaire
 
-## Data Storage
-- **Local Storage** for MVP (session persistence)
-- Ready for Supabase backend integration (developer will add later)
+**AI Prompt Strategy:**
+- Structured prompts with clear role definition
+- Rich business context injection
+- Category-based recommendations (6 categories)
+- Detailed output requirements (ROI, timelines, costs ₹10K-₹95K range)
 
-## Environment Variables
-- **GEMINI_API_KEY** - Google Gemini API key (configured in Replit Secrets)
+**Response Validation:** Zod schemas validate all AI responses
 
-## Recent Changes
+### Data Validation & Type Safety
 
-### November 17, 2025 - Proposal Download & Client Submission Features
+**Validation Library:** Zod for runtime type checking
+- `BusinessProfileSchema`: Validates 30+ business profile fields
+- `ServiceRecommendationSchema`: Ensures required recommendation fields
+- `GeminiAnalysisResponseSchema`: Validates complete AI responses
 
-**Proposal Export System:**
-- ✅ Created professional HTML proposal generator (no backend required)
-- ✅ Download Proposal button generates comprehensive client-ready document
-- ✅ Proposal includes all recommendations, pricing, timeline, and project blueprint
-- ✅ Prominently features contact information: +91 909 115 6095, sales@cehpoint.co.in, cehpoint.co.in
-- ✅ Professional formatting with company branding, testimonials, and CTAs
-- ✅ Downloadable as HTML file (can be printed to PDF by client)
+**TypeScript Types:** Comprehensive interfaces in `types/index.ts`
 
-**Client Submission Features:**
-- ✅ Submit to Cehpoint button opens WhatsApp with pre-filled business summary
-- ✅ Pre-populated message includes company name, solution count, and consultation request
-- ✅ Direct integration with sales team (+91 909 115 6095)
-- ✅ All features work client-side without backend
+### Proposal Generation
 
-**Contact Information Updates:**
-- ✅ Changed all email addresses to sales@cehpoint.co.in (from contact@cehpoint.com)
-- ✅ Updated across homepage footer, dashboard footer, and proposal templates
-- ✅ Consistent branding: phone, email, website URL in all customer touchpoints
+**HTML Export:** Server-side HTML generation with embedded CSS
+- Professional styling with gradients and modern typography
+- Responsive design for all devices
+- Sections: Executive Summary, Recommendations, Blueprint, Costs
 
-### November 17, 2025 - Masterpiece UX: Trust Signals, Global Contact & Mobile Optimization
+**WhatsApp Sharing:** URL-encoded messages with proposal summaries
 
-**Trust & Credibility Enhancements:**
-- ✅ Added client testimonials section with 3 credible success stories (FinTech, E-commerce, SaaS)
-- ✅ Added comprehensive FAQ section with 5 key questions (pricing, timelines, international clients, differentiation, support)
-- ✅ Enhanced footer with global contact options (Email, Phone, WhatsApp, Time Zones)
-- ✅ Added professional privacy/terms links in footer
-- ✅ Improved footer messaging to emphasize global reach: "500+ clients across 40+ countries"
+### Environment Configuration
 
-**UX & Mobile Improvements:**
-- ✅ Added logout confirmation dialog to prevent accidental logout
-- ✅ Optimized mobile responsiveness: hero stats grid (2 cols mobile, 4 cols desktop)
-- ✅ Fixed questionnaire sidebar overflow with max-height and scroll
-- ✅ Made dashboard buttons responsive with flex-wrap and smaller text on mobile
-- ✅ All trust elements (testimonials, FAQ, certifications) properly styled for mobile
+**Required Variables:**
+- `GEMINI_API_KEY`: Google Gemini API authentication
 
-**Technical Fixes:**
-- ✅ Fixed missing icon imports (Mail, Phone, Clock) in homepage
-- ✅ All sections verified rendering correctly via curl tests
-- ✅ No LSP errors or build issues
+**Validation:** `lib/env-validation.ts` validates required variables on API execution
 
-### November 17, 2025 - Multi-Currency Support & Standardized Pricing
+## Sales Team Access Instructions
 
-**Global Positioning & Sample Portfolio:**
-- ✅ Changed messaging from "for Indian Businesses" to "for Growing Businesses Worldwide"
-- ✅ Added multi-currency pricing throughout (USD / INR / EUR) on all pages
-- ✅ Integrated "View Projects Portfolio" button linking to https://portfolios.cehpoint.co.in/
-- ✅ Updated pricing section to emphasize global reach with "Multi-currency support"
-- ✅ Changed stats from "₹25K+" to "$300+" for international appeal
-- ✅ Modified questionnaire sidebar pricing message to show multi-currency
+### How to Access Your Features
 
-**AI Recommendations Pricing Standardization:**
-- ✅ Updated Gemini API prompts to generate pricing between ₹10,000 - ₹95,000
-- ✅ All AI-generated recommendations now include USD equivalent in brackets
-- ✅ Format: "₹[amount] ($[usd_amount])" using ~₹83 = $1 conversion
-- ✅ Project blueprint total costs also follow same ₹10,000-₹95,000 range
-- ✅ Ensures affordable, competitive pricing for all clients
+1. **Sign In**
+   - Visit your Cehpoint platform URL
+   - Enter your email to access
+   - Click "New Client Proposal" to start fresh session
 
-### November 16, 2025 - Production-Ready Platform with Robust Validation & Multi-Select Regions
+2. **Collect Client Data**
+   - **Option A:** Upload client's business profile document (PDF/DOCX/TXT)
+   - **Option B:** Fill 7-section questionnaire (auto-saves)
 
-**Professional Dashboard & WhatsApp Integration:**
-- ✅ Redesigned dashboard from "AI Recommendations" to "Technology Solutions Portfolio"
-- ✅ Removed AI-centric language and replaced with professional consulting terminology
-- ✅ Added credibility section with certifications (ISO 27001, SOC 2, Google Partner, CMMI Level 3)
-- ✅ Integrated WhatsApp contact buttons (wa.me/919091156095) for every service
-- ✅ Added "Discuss Solution" and "Request Quote" WhatsApp CTAs on each service card
-- ✅ Enhanced landing page with trust badges and certification section
-- ✅ Added professional consulting footer with contact information
-- ✅ Improved overall UI to look like genuine enterprise consulting firm
+3. **Generate Recommendations**
+   - Click "Submit & Generate Recommendations"
+   - Wait ~30 seconds for AI analysis
 
-**Multi-Select Operating Regions:**
-- ✅ Created custom MultiSelect component for intuitive multi-region selection
-- ✅ Updated BusinessProfile type to use string[] for operatingRegions
-- ✅ Added data migration logic for legacy sessions (string → array)
-- ✅ Fixed Gemini API integration to properly handle array data
+4. **Customize Proposal**
+   - Click "Customize Proposal" button
+   - Add personalized sales notes
+   - Toggle recommendations on/off using checkboxes
+   - View proposal summary (shows included/excluded count)
 
-**Production-Grade Validation & Error Handling:**
-- ✅ Installed and integrated Zod for comprehensive schema validation
-- ✅ Created validation schemas for all data structures (ServiceRecommendation, ProjectBlueprint, BusinessProfile)
-- ✅ Added robust validation to Gemini API responses to prevent crashes from malformed AI output
-- ✅ Added request payload validation and size limits (1MB for profile, 2MB for documents)
-- ✅ Implemented boolean coercion to handle "Yes"/"No" string responses from Gemini
-- ✅ Wrapped all JSON.parse operations in try/catch with user-friendly error messages
-- ✅ Created centralized normalizeBusinessProfile function for consistent data normalization
-- ✅ Added null/empty response checks before parsing
-- ✅ Auto-generate missing IDs for recommendations to handle Gemini variations
-- ✅ Added proper error handling to both analyze-profile and analyze-document APIs
-- ✅ Implemented content size validation for document uploads (500KB limit)
+5. **Share with Client**
+   - **Download:** Click "Download Proposal" for HTML file (can print to PDF)
+   - **WhatsApp:** Click "Share via WhatsApp" for instant messaging
 
-### November 14, 2025 - Production-Ready MVP Complete
-- ✅ Set up complete Next.js application with TypeScript
-- ✅ Integrated Google Gemini API for AI analysis
-- ✅ Built 7-section comprehensive questionnaire with dropdown selects
-- ✅ Created professional corporate UI with Tailwind CSS v4
-- ✅ Implemented session persistence with localStorage
-- ✅ Added visual progress indicators to questionnaire
-- ✅ Enhanced homepage with professional corporate design
-- ✅ Converted Operating Countries/Regions to dropdown (46+ countries)
-- ✅ Disabled business profile upload (requires developer configuration)
-- ✅ Added environment variable validation
-- ✅ Fixed all TypeScript/build errors
-- ✅ Configured Vercel deployment (autoscale)
-- ✅ Added comprehensive Supabase integration documentation
-- ✅ Added commented backend integration code for developers
-- ✅ Created deployment checklist and guides
+### Contact Information
 
-## User Preferences
-- Clean, modern gradient-based design
-- Masterpiece UX with smooth transitions
-- High-quality AI recommendations (specific, actionable, valuable)
-- Professional color scheme (blue, indigo, purple gradients)
-- Mobile-friendly responsive design
+**Sales Team:** +91 909 115 6095  
+**Email:** sales@cehpoint.co.in  
+**Portfolio:** https://portfolios.cehpoint.co.in/
 
-## Development Notes
+## External Dependencies
 
-### Tailwind CSS Setup
-- Using Tailwind CSS v4 with @tailwindcss/postcss
-- PostCSS configured with autoprefixer
-- Global styles in styles/globals.css
+### AI Services
+- **Google Gemini AI** (`@google/genai` v1.29.1)
+- Requires `GEMINI_API_KEY` environment variable
 
-### Next.js Configuration
-- Port 5000 for Replit compatibility
-- Hostname 0.0.0.0 for public access
-- Pages Router (not App Router)
+### File Processing
+- **pdf-parse** (v2.4.5): PDF text extraction
+- **mammoth** (v1.11.0): DOCX to text conversion
+- **formidable** (v3.5.4): File upload handling
 
-### Future Enhancements (For Developer)
-- Supabase backend integration
-- User authentication with database
-- Persistent storage of profiles and recommendations
-- Email notifications
-- PDF export of recommendations
-- Admin dashboard
-- Analytics and tracking
+### UI & Styling
+- **Tailwind CSS** (v4.0.15): Utility-first CSS
+- **lucide-react** (v0.553.0): Icon library
+- **react-hot-toast** (v2.6.0): Toast notifications
 
-## Technical Decisions
+### Validation & Type Safety
+- **Zod** (v4.1.12): Runtime schema validation
+- **TypeScript** (v5.8.2): Static type checking
 
-1. **Why Gemini API?** - Superior analysis capabilities, JSON mode, multimodal support
-2. **Why Local Storage?** - Simplifies MVP, easy to migrate to Supabase later
-3. **Why Next.js?** - Server-side API routes, easy deployment, TypeScript support
-4. **Why Tailwind CSS?** - Rapid UI development, consistent design system
-5. **Why Pages Router?** - Simpler for this use case than App Router
+### Future Database (Ready for Integration)
+- **Supabase**: Planned database and authentication
+  - Migration guide in README.md
+  - `lib/supabase.ts.example` template ready
+  - Environment variable placeholders documented
 
-## MVP Status & Limitations
+## Deployment
 
-### ✅ Production-Ready Features
-- Professional landing page with corporate design
-- Email-based "authentication" (localStorage-based for MVP)
-- Complete 7-section questionnaire with:
-  - 18+ industries with custom option
-  - 10+ business models
-  - 6 team size ranges
-  - 46+ countries/regions
-  - Comprehensive solution types and budget ranges
-- Session persistence (auto-saves every change)
-- Google Gemini AI analysis
-- AI-generated recommendations (6-12 per submission)
-- Project blueprint with phases and costs
-- Responsive design (mobile, tablet, desktop)
-- Visual progress indicators
-- Error handling and loading states
+**Platform:** Vercel (configured via `vercel.json`)  
+**Build Command:** `npm run build`  
+**Framework:** Next.js (autoscale deployment)
 
-### ⚠️ MVP Limitations (For Backend Integration)
-1. **Authentication**: localStorage-based (not production-ready)
-   - No multi-device support
-   - Data lost if browser cache cleared
-   - No password security
-   
-2. **Data Persistence**: No database
-   - Recommendations stored in localStorage only
-   - No historical data retention
-   - Cannot share or export recommendations
-   
-3. **Document Upload**: Temporarily disabled
-   - Requires production file storage configuration
-   - Backend parsing needs testing on Vercel
-   
-4. **Scalability**: Client-side heavy
-   - All processing via API routes
-   - No caching layer
-   - Subject to Gemini API rate limits
-
-### 📋 Handoff Documentation
-- **SUPABASE_INTEGRATION.md** - Complete Supabase backend integration guide
-- **DEPLOYMENT.md** - Vercel deployment checklist
-- **lib/supabase.ts.example** - Supabase client example
-- **lib/env-validation.ts** - Environment variable validation
-- **Commented code** - TODO markers throughout codebase for backend integration
-
-## Performance
-- Fast initial load
-- Efficient AI processing with streaming support
-- Responsive UI with smooth transitions
-- Optimized for Vercel/Replit deployment
+See README.md for complete deployment checklist and instructions.

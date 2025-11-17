@@ -168,7 +168,7 @@ export default function Discovery() {
                   <div>
                     <h3 className="font-semibold text-blue-900 mb-1">Smart Information Extraction</h3>
                     <p className="text-sm text-blue-800">
-                      Our AI analyzes your document to extract business details, challenges, goals, and technology needs. If any critical information is missing, you'll be prompted to provide it.
+                      Our AI analyzes your document to extract business details, challenges, goals, and technology needs. If any critical information is missing, you&apos;ll be prompted to provide it.
                     </p>
                   </div>
                 </div>

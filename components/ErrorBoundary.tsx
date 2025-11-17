@@ -56,7 +56,7 @@ class ErrorBoundary extends Component<Props, State> {
               Oops! Something went wrong
             </h1>
             <p className="text-gray-600 mb-6">
-              We encountered an unexpected error. Don't worry, your data is safe.
+              We encountered an unexpected error. Don&apos;t worry, your data is safe.
             </p>
             {process.env.NODE_ENV === 'development' && this.state.error && (
               <div className="bg-gray-100 rounded-lg p-4 mb-6 text-left">
