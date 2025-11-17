@@ -2,7 +2,7 @@ import { useEffect } from 'react';
 import { useRouter } from 'next/router';
 import { isAuthenticated } from '@/lib/storage';
 import Button from '@/components/Button';
-import { Target, Shield, Zap, Brain, CheckCircle, TrendingUp, Users, Award, ArrowRight, Building2, Lock, Database, Cloud, BarChart3, MessageCircle } from 'lucide-react';
+import { Target, Shield, Zap, Brain, CheckCircle, TrendingUp, Users, Award, ArrowRight, Building2, Lock, Database, Cloud, BarChart3, MessageCircle, Mail, Phone, Clock } from 'lucide-react';
 import Image from 'next/image';
 
 export default function Home() {

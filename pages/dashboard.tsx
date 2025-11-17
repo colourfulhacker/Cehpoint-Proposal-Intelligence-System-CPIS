@@ -56,10 +56,12 @@ export default function Dashboard() {
   }, [router]);
 
   const handleLogout = () => {
-    clearSession();
-    clearUser();
-    toast.success('Logged out successfully');
-    router.push('/login');
+    if (window.confirm('Are you sure you want to log out? Your recommendations will remain saved in this browser.')) {
+      clearSession();
+      clearUser();
+      toast.success('Logged out successfully');
+      router.push('/login');
+    }
   };
 
   const filteredRecommendations = selectedCategory === 'All' 
@@ -90,15 +92,15 @@ export default function Dashboard() {
                 <p className="text-sm text-gray-600">{user?.companyName || 'Guest'}</p>
               </div>
             </div>
-            <div className="flex gap-3">
+            <div className="flex gap-2 md:gap-3 flex-wrap">
               <Button 
                 variant="outline" 
                 onClick={() => window.open('https://portfolios.cehpoint.co.in/', '_blank')}
-                className="text-blue-600 border-blue-600 hover:bg-blue-600 hover:text-white"
+                className="text-blue-600 border-blue-600 hover:bg-blue-600 hover:text-white text-sm md:text-base"
               >
                 View Sample Project
               </Button>
-              <Button variant="outline" onClick={handleLogout}>
+              <Button variant="outline" onClick={handleLogout} className="text-sm md:text-base">
                 <LogOut className="w-4 h-4" />
                 Logout
               </Button>

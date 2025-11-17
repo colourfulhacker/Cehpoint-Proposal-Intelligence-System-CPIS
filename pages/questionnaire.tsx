@@ -653,7 +653,7 @@ export default function Questionnaire() {
             </div>
 
             <div className="lg:col-span-1">
-              <div className="sticky top-8">
+              <div className="sticky top-8 max-h-screen overflow-y-auto">
                 <Card>
                   <div className="mb-6">
                     <div className="flex items-center gap-2 mb-4">
