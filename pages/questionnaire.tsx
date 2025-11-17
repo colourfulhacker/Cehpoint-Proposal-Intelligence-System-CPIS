@@ -746,8 +746,8 @@ export default function Questionnaire() {
                       <div className="flex items-start gap-2">
                         <Target className="w-4 h-4 text-purple-600 flex-shrink-0 mt-0.5" />
                         <div>
-                          <p className="text-xs text-purple-900 font-semibold">🎯 Affordable Pricing</p>
-                          <p className="text-xs text-purple-800">Starting from just ₹25,000 - EMI options available</p>
+                          <p className="text-xs text-purple-900 font-semibold">🎯 Competitive Global Pricing</p>
+                          <p className="text-xs text-purple-800">Starting from $300 / ₹25,000 / €280 - Flexible payment plans</p>
                         </div>
                       </div>
                     </div>

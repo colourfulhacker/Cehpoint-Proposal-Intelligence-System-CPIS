@@ -90,10 +90,19 @@ export default function Dashboard() {
                 <p className="text-sm text-gray-600">{user?.companyName || 'Guest'}</p>
               </div>
             </div>
-            <Button variant="outline" onClick={handleLogout}>
-              <LogOut className="w-4 h-4" />
-              Logout
-            </Button>
+            <div className="flex gap-3">
+              <Button 
+                variant="outline" 
+                onClick={() => window.open('https://portfolios.cehpoint.co.in/', '_blank')}
+                className="text-blue-600 border-blue-600 hover:bg-blue-600 hover:text-white"
+              >
+                View Sample Project
+              </Button>
+              <Button variant="outline" onClick={handleLogout}>
+                <LogOut className="w-4 h-4" />
+                Logout
+              </Button>
+            </div>
           </div>
         </div>
       </div>

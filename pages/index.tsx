@@ -45,18 +45,27 @@ export default function Home() {
               Trusted by 500+ Enterprises Worldwide
             </div>
             <h1 className="text-4xl md:text-6xl font-bold text-gray-900 mb-6 leading-tight">
-              Affordable Technology Solutions
-              <span className="block text-blue-600 mt-2">for Indian Businesses</span>
+              Enterprise Technology Solutions
+              <span className="block text-blue-600 mt-2">for Growing Businesses Worldwide</span>
             </h1>
             <p className="text-xl text-gray-700 mb-4 leading-relaxed max-w-3xl mx-auto font-medium">
-              Cehpoint delivers enterprise-grade IT, cybersecurity, and automation strategies at prices designed for Indian startups and SMEs.
+              Cehpoint delivers world-class IT, cybersecurity, and automation strategies at competitive prices for startups and SMEs globally.
             </p>
             <p className="text-lg text-green-700 font-semibold mb-10">
-              Starting from just ₹25,000 - World-class technology made accessible
+              Starting from $300 / ₹25,000 / €280 - Enterprise-grade technology made accessible
             </p>
             <div className="flex gap-4 justify-center flex-wrap">
               <Button size="lg" onClick={() => router.push('/login')} className="px-8 shadow-lg">
                 Request Consultation
+                <ArrowRight className="w-5 h-5" />
+              </Button>
+              <Button 
+                size="lg" 
+                variant="outline"
+                onClick={() => window.open('https://portfolios.cehpoint.co.in/', '_blank')} 
+                className="px-8 shadow-lg border-2 border-blue-600 text-blue-600 hover:bg-blue-600 hover:text-white"
+              >
+                View Sample Project
                 <ArrowRight className="w-5 h-5" />
               </Button>
               <a
@@ -82,7 +91,7 @@ export default function Home() {
               <div className="text-sm font-medium text-gray-900">Success Rate</div>
             </div>
             <div className="bg-white border-2 border-gray-200 rounded-lg p-6 text-center shadow-sm hover:shadow-md transition-shadow">
-              <div className="text-3xl font-bold text-purple-600 mb-1">₹25K+</div>
+              <div className="text-3xl font-bold text-purple-600 mb-1">$300+</div>
               <div className="text-sm font-medium text-gray-900">Starting Price</div>
             </div>
             <div className="bg-white border-2 border-gray-200 rounded-lg p-6 text-center shadow-sm hover:shadow-md transition-shadow">
@@ -101,10 +110,10 @@ export default function Home() {
               Comprehensive Technology Services
             </h2>
             <p className="text-lg text-gray-700 mb-2 font-medium">
-              End-to-end solutions designed for Indian businesses - enterprise quality at startup prices
+              End-to-end solutions for global businesses - enterprise quality at competitive prices
             </p>
             <p className="text-md text-green-600 font-semibold">
-              Flexible payment plans available • No hidden costs
+              Flexible payment plans • Multi-currency support • No hidden costs
             </p>
           </div>
           
@@ -119,7 +128,7 @@ export default function Home() {
               <p className="text-sm text-gray-700 leading-relaxed font-medium mb-3">
                 Intelligent workflow optimization and RPA implementation to reduce costs and increase efficiency
               </p>
-              <p className="text-xs text-green-600 font-semibold">From ₹50,000</p>
+              <p className="text-xs text-green-600 font-semibold">From $600 / ₹50,000 / €560</p>
             </div>
 
             <div className="group bg-white border-2 border-gray-200 rounded-lg p-6 hover:border-red-500 hover:shadow-xl transition-all cursor-pointer">
@@ -132,7 +141,7 @@ export default function Home() {
               <p className="text-sm text-gray-700 leading-relaxed font-medium mb-3">
                 Enterprise-grade security architecture, compliance management, and threat protection
               </p>
-              <p className="text-xs text-green-600 font-semibold">From ₹75,000</p>
+              <p className="text-xs text-green-600 font-semibold">From $900 / ₹75,000 / €840</p>
             </div>
 
             <div className="group bg-white border-2 border-gray-200 rounded-lg p-6 hover:border-purple-500 hover:shadow-xl transition-all cursor-pointer">
@@ -145,7 +154,7 @@ export default function Home() {
               <p className="text-sm text-gray-700 leading-relaxed font-medium mb-3">
                 Migration, optimization, and management of cloud infrastructure across AWS, Azure, and GCP
               </p>
-              <p className="text-xs text-green-600 font-semibold">From ₹60,000</p>
+              <p className="text-xs text-green-600 font-semibold">From $720 / ₹60,000 / €670</p>
             </div>
 
             <div className="group bg-white border-2 border-gray-200 rounded-lg p-6 hover:border-green-500 hover:shadow-xl transition-all cursor-pointer">
@@ -158,25 +167,25 @@ export default function Home() {
               <p className="text-sm text-gray-700 leading-relaxed font-medium mb-3">
                 Machine learning models, predictive analytics, and data-driven decision intelligence
               </p>
-              <p className="text-xs text-green-600 font-semibold">From ₹1,00,000</p>
+              <p className="text-xs text-green-600 font-semibold">From $1,200 / ₹1,00,000 / €1,120</p>
             </div>
           </div>
         </div>
       </section>
 
-      {/* Pricing Section for Indian Market */}
+      {/* Pricing Section */}
       <section className="py-20 bg-gradient-to-br from-green-50 to-blue-50">
         <div className="container mx-auto px-6">
           <div className="max-w-4xl mx-auto">
             <div className="text-center mb-12">
               <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
-                Transparent Pricing for Indian Businesses
+                Transparent Pricing for Growing Businesses
               </h2>
               <p className="text-lg text-gray-700 font-medium mb-2">
-                Enterprise-quality solutions at prices designed for the Indian market
+                Enterprise-quality solutions at competitive global rates
               </p>
               <p className="text-md text-green-600 font-semibold">
-                No hidden fees • Flexible payment options • EMI available
+                No hidden fees • Multi-currency support • Flexible payment plans
               </p>
             </div>
             
@@ -210,15 +219,15 @@ export default function Home() {
                   </div>
                   <div className="flex items-start gap-3">
                     <CheckCircle className="w-5 h-5 text-blue-600 flex-shrink-0 mt-0.5" />
-                    <p className="text-sm text-gray-700 font-medium">EMI options available for projects above ₹1 lakh</p>
+                    <p className="text-sm text-gray-700 font-medium">Installment payment options available for larger projects</p>
                   </div>
                   <div className="flex items-start gap-3">
                     <CheckCircle className="w-5 h-5 text-blue-600 flex-shrink-0 mt-0.5" />
-                    <p className="text-sm text-gray-700 font-medium">UPI, Bank Transfer, International cards accepted</p>
+                    <p className="text-sm text-gray-700 font-medium">Multiple currencies: USD, EUR, GBP, INR accepted</p>
                   </div>
                   <div className="flex items-start gap-3">
                     <CheckCircle className="w-5 h-5 text-blue-600 flex-shrink-0 mt-0.5" />
-                    <p className="text-sm text-gray-700 font-medium">GST compliant invoicing</p>
+                    <p className="text-sm text-gray-700 font-medium">International payment methods & invoicing</p>
                   </div>
                 </div>
               </div>
@@ -238,7 +247,11 @@ export default function Home() {
                     <MessageCircle className="w-4 h-4" />
                     Get Custom Quote
                   </a>
-                  <Button onClick={() => router.push('/login')} variant="outline" className="border-2 border-blue-600 text-blue-600 hover:bg-blue-600 hover:text-white font-semibold">
+                  <Button 
+                    onClick={() => window.open('https://portfolios.cehpoint.co.in/', '_blank')} 
+                    variant="outline" 
+                    className="border-2 border-blue-600 text-blue-600 hover:bg-blue-600 hover:text-white font-semibold"
+                  >
                     View Sample Projects
                   </Button>
                 </div>
