@@ -65,7 +65,7 @@ export default function Home() {
                 onClick={() => window.open('https://portfolios.cehpoint.co.in/', '_blank')} 
                 className="px-8 shadow-lg border-2 border-blue-600 text-blue-600 hover:bg-blue-600 hover:text-white"
               >
-                View Sample Project
+                View Projects Portfolio
                 <ArrowRight className="w-5 h-5" />
               </Button>
               <a
@@ -252,7 +252,7 @@ export default function Home() {
                     variant="outline" 
                     className="border-2 border-blue-600 text-blue-600 hover:bg-blue-600 hover:text-white font-semibold"
                   >
-                    View Sample Projects
+                    View Projects Portfolio
                   </Button>
                 </div>
               </div>

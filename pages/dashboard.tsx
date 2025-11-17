@@ -120,7 +120,7 @@ export default function Dashboard() {
                 onClick={() => window.open('https://portfolios.cehpoint.co.in/', '_blank')}
                 className="text-blue-600 border-blue-600 hover:bg-blue-600 hover:text-white text-sm md:text-base"
               >
-                View Sample Project
+                View Projects Portfolio
               </Button>
               <Button variant="outline" onClick={handleLogout} className="text-sm md:text-base">
                 <LogOut className="w-4 h-4" />

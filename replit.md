@@ -136,7 +136,7 @@ Uses Google Gemini to:
 **Global Positioning & Sample Portfolio:**
 - ✅ Changed messaging from "for Indian Businesses" to "for Growing Businesses Worldwide"
 - ✅ Added multi-currency pricing throughout (USD / INR / EUR) on all pages
-- ✅ Integrated "View Sample Project" button linking to https://portfolios.cehpoint.co.in/
+- ✅ Integrated "View Projects Portfolio" button linking to https://portfolios.cehpoint.co.in/
 - ✅ Updated pricing section to emphasize global reach with "Multi-currency support"
 - ✅ Changed stats from "₹25K+" to "$300+" for international appeal
 - ✅ Modified questionnaire sidebar pricing message to show multi-currency
