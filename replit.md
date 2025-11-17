@@ -69,6 +69,8 @@ Uses Google Gemini to:
 - Business impact and ROI display
 - Timeline and cost estimates
 - Project blueprint with phases
+- **Download Proposal** - Export comprehensive HTML proposal with all recommendations
+- **Submit to Cehpoint** - Connect via WhatsApp with pre-filled inquiry
 
 ## User Flow
 
@@ -86,6 +88,27 @@ Uses Google Gemini to:
 - **GEMINI_API_KEY** - Google Gemini API key (configured in Replit Secrets)
 
 ## Recent Changes
+
+### November 17, 2025 - Proposal Download & Client Submission Features
+
+**Proposal Export System:**
+- ✅ Created professional HTML proposal generator (no backend required)
+- ✅ Download Proposal button generates comprehensive client-ready document
+- ✅ Proposal includes all recommendations, pricing, timeline, and project blueprint
+- ✅ Prominently features contact information: +91 909 115 6095, sales@cehpoint.co.in, cehpoint.co.in
+- ✅ Professional formatting with company branding, testimonials, and CTAs
+- ✅ Downloadable as HTML file (can be printed to PDF by client)
+
+**Client Submission Features:**
+- ✅ Submit to Cehpoint button opens WhatsApp with pre-filled business summary
+- ✅ Pre-populated message includes company name, solution count, and consultation request
+- ✅ Direct integration with sales team (+91 909 115 6095)
+- ✅ All features work client-side without backend
+
+**Contact Information Updates:**
+- ✅ Changed all email addresses to sales@cehpoint.co.in (from contact@cehpoint.com)
+- ✅ Updated across homepage footer, dashboard footer, and proposal templates
+- ✅ Consistent branding: phone, email, website URL in all customer touchpoints
 
 ### November 17, 2025 - Masterpiece UX: Trust Signals, Global Contact & Mobile Optimization
 

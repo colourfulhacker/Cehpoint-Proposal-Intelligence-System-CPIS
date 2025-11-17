@@ -12,9 +12,9 @@ export function generateProposalHTML(data: ProposalData): string {
   
   const totalEstimate = recommendations.reduce((sum, rec) => {
     const price = typeof rec.estimatedCost === 'string' 
-      ? parseInt(rec.estimatedCost.replace(/[^0-9]/g, '')) 
+      ? parseInt(rec.estimatedCost.replace(/[^0-9]/g, '').split('(')[0] || '0') 
       : rec.estimatedCost;
-    return sum + (price || 0);
+    return sum + (isNaN(price) ? 0 : price);
   }, 0);
 
   return `<!DOCTYPE html>
@@ -353,6 +353,10 @@ export function generateProposalHTML(data: ProposalData): string {
                 <strong>Why Needed</strong>
                 <span>${rec.whyNeeded}</span>
               </div>
+              <div class="detail-item" style="grid-column: 1 / -1;">
+                <strong>How It Helps</strong>
+                <span>${rec.howItHelps}</span>
+              </div>
             </div>
           </div>
         `).join('')}
@@ -456,17 +460,21 @@ export function downloadProposal(data: ProposalData): void {
 }
 
 export function submitToCehpoint(companyName: string, recommendations: ServiceRecommendation[]): string {
+  const highPriority = recommendations.filter(r => r.priority === 'High');
+  const topRecommendations = highPriority.slice(0, 3).map(r => r.title).join(', ');
+  
   const message = `Hi Cehpoint Team,
 
-I'm interested in the technology solutions proposal generated for ${companyName}.
+I'm interested in the technology solutions proposal for ${companyName}.
 
 Summary:
-- Total Solutions: ${recommendations.length}
-- High Priority Items: ${recommendations.filter(r => r.priority === 'High').length}
+• Total Solutions: ${recommendations.length}
+• High Priority: ${highPriority.length}
+• Top Recommendations: ${topRecommendations || recommendations.slice(0, 2).map(r => r.title).join(', ')}
 
-I'd like to schedule a consultation to discuss implementation details and pricing.
+I'd like to schedule a consultation to discuss implementation, timelines, and pricing.
 
-Thank you!`;
+Looking forward to connecting!`;
 
   return `https://wa.me/919091156095?text=${encodeURIComponent(message)}`;
 }
