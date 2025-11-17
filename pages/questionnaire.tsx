@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback, useRef } from 'react';
 import { useRouter } from 'next/router';
 import Button from '@/components/Button';
 import Input from '@/components/Input';
@@ -7,7 +7,7 @@ import MultiSelect from '@/components/MultiSelect';
 import Card from '@/components/Card';
 import { isAuthenticated, saveSession, getSession, getUser, saveQuestionnaireDraft, getQuestionnaireDraft, clearQuestionnaireDraft } from '@/lib/storage';
 import { BusinessProfile } from '@/types';
-import { ArrowRight, ArrowLeft, Sparkles, Check } from 'lucide-react';
+import { ArrowRight, ArrowLeft, Sparkles, Check, Cloud, Shield, Zap, Brain, Target, Lock, Database, Workflow, Lightbulb, TrendingUp, MessageCircle } from 'lucide-react';
 import toast, { Toaster } from 'react-hot-toast';
 
 export default function Questionnaire() {
@@ -15,6 +15,9 @@ export default function Questionnaire() {
   const { fromUpload } = router.query;
   const [currentSection, setCurrentSection] = useState(0);
   const [loading, setLoading] = useState(false);
+  const [liveSuggestions, setLiveSuggestions] = useState<any[]>([]);
+  const [loadingSuggestions, setLoadingSuggestions] = useState(false);
+  const suggestionsTimeoutRef = useRef<NodeJS.Timeout | null>(null);
   
   const [formData, setFormData] = useState<BusinessProfile>({
     businessName: '',
@@ -99,8 +102,62 @@ export default function Questionnaire() {
     }
   }, [formData, customIndustry, currentSection]);
 
+  const fetchLiveSuggestions = useCallback(async () => {
+    const hasContent = Object.values(formData).some(value => {
+      if (typeof value === 'boolean') return false;
+      if (Array.isArray(value)) return value.length > 0;
+      return value && value.toString().trim() !== '';
+    });
+
+    if (!hasContent) {
+      setLiveSuggestions([]);
+      return;
+    }
+
+    try {
+      setLoadingSuggestions(true);
+      const response = await fetch('/api/get-live-suggestions', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ formData, currentSection }),
+      });
+
+      if (response.ok) {
+        const data = await response.json();
+        setLiveSuggestions(data.suggestions || []);
+      }
+    } catch (error) {
+      console.error('Error fetching suggestions:', error);
+    } finally {
+      setLoadingSuggestions(false);
+    }
+  }, [formData, currentSection]);
+
+  useEffect(() => {
+    if (suggestionsTimeoutRef.current) {
+      clearTimeout(suggestionsTimeoutRef.current);
+    }
+
+    suggestionsTimeoutRef.current = setTimeout(() => {
+      fetchLiveSuggestions();
+    }, 1500);
+
+    return () => {
+      if (suggestionsTimeoutRef.current) {
+        clearTimeout(suggestionsTimeoutRef.current);
+      }
+    };
+  }, [fetchLiveSuggestions]);
+
   const updateField = (field: keyof BusinessProfile, value: any) => {
     setFormData(prev => ({ ...prev, [field]: value }));
+  };
+
+  const getIcon = (iconName: string) => {
+    const icons: Record<string, any> = {
+      Cloud, Shield, Zap, Brain, Target, Lock, Database, Workflow, Lightbulb, TrendingUp
+    };
+    return icons[iconName] || Lightbulb;
   };
 
   const sections = [
@@ -429,6 +486,9 @@ export default function Questionnaire() {
               Business Profile Questionnaire
             </h1>
           </div>
+          <p className="text-gray-600 max-w-2xl mx-auto">
+            Share your business details and get real-time AI-powered recommendations as you go
+          </p>
         </div>
 
         <div className="max-w-4xl mx-auto mb-8">
@@ -474,8 +534,10 @@ export default function Questionnaire() {
           </div>
         </div>
 
-        <div className="max-w-3xl mx-auto">
-          <Card>
+        <div className="max-w-7xl mx-auto">
+          <div className="grid lg:grid-cols-3 gap-8">
+            <div className="lg:col-span-2">
+              <Card>
             <div className="mb-8">
               <div className="inline-flex items-center gap-2 px-4 py-2 bg-indigo-50 rounded-lg mb-4">
                 <span className="text-3xl font-bold text-indigo-600">
@@ -591,6 +653,96 @@ export default function Questionnaire() {
               </div>
             </form>
           </Card>
+            </div>
+
+            <div className="lg:col-span-1">
+              <div className="sticky top-8">
+                <Card>
+                  <div className="mb-6">
+                    <div className="flex items-center gap-2 mb-4">
+                      <Lightbulb className="w-6 h-6 text-indigo-600" />
+                      <h3 className="text-lg font-bold text-gray-900">AI Insights</h3>
+                    </div>
+                    <p className="text-sm text-gray-600">
+                      Based on your responses, here are personalized recommendations
+                    </p>
+                  </div>
+
+                  {loadingSuggestions ? (
+                    <div className="space-y-4">
+                      {[1, 2, 3].map(i => (
+                        <div key={i} className="animate-pulse bg-gray-100 rounded-lg p-4 h-24"></div>
+                      ))}
+                    </div>
+                  ) : liveSuggestions.length > 0 ? (
+                    <div className="space-y-4">
+                      {liveSuggestions.map((suggestion, idx) => {
+                        const IconComponent = getIcon(suggestion.icon);
+                        return (
+                          <div 
+                            key={idx} 
+                            className="bg-gradient-to-br from-blue-50 to-indigo-50 rounded-xl p-4 border border-indigo-100 hover:shadow-md transition-all duration-300"
+                          >
+                            <div className="flex items-start gap-3">
+                              <div className="w-10 h-10 bg-indigo-600 rounded-lg flex items-center justify-center flex-shrink-0">
+                                <IconComponent className="w-5 h-5 text-white" />
+                              </div>
+                              <div className="flex-1">
+                                <h4 className="font-semibold text-gray-900 text-sm mb-1">
+                                  {suggestion.title}
+                                </h4>
+                                <p className="text-xs text-gray-700 leading-relaxed">
+                                  {suggestion.description}
+                                </p>
+                              </div>
+                            </div>
+                          </div>
+                        );
+                      })}
+                      <div className="pt-4 border-t border-gray-200 text-center">
+                        <p className="text-xs text-gray-500 flex items-center justify-center gap-1">
+                          <TrendingUp className="w-3 h-3" />
+                          Insights update as you fill the form
+                        </p>
+                      </div>
+                    </div>
+                  ) : (
+                    <div className="text-center py-8">
+                      <div className="w-16 h-16 bg-gray-100 rounded-full flex items-center justify-center mx-auto mb-3">
+                        <Sparkles className="w-8 h-8 text-gray-400" />
+                      </div>
+                      <p className="text-sm text-gray-500">
+                        Start filling out the form to see personalized AI recommendations
+                      </p>
+                    </div>
+                  )}
+
+                  <div className="mt-6 p-4 bg-green-50 rounded-lg border border-green-200">
+                    <div className="flex items-start gap-2">
+                      <MessageCircle className="w-5 h-5 text-green-600 flex-shrink-0 mt-0.5" />
+                      <div>
+                        <h4 className="font-semibold text-green-900 text-sm mb-1">
+                          Need Help?
+                        </h4>
+                        <p className="text-xs text-green-800 mb-2">
+                          Chat with us on WhatsApp for instant support
+                        </p>
+                        <a
+                          href="https://wa.me/919091156095"
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="inline-flex items-center gap-1 text-xs font-semibold text-green-700 hover:text-green-900"
+                        >
+                          <MessageCircle className="w-3 h-3" />
+                          Start Chat
+                        </a>
+                      </div>
+                    </div>
+                  </div>
+                </Card>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </div>
