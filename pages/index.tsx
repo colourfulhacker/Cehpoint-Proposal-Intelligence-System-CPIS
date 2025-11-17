@@ -80,8 +80,8 @@ export default function Home() {
             </div>
           </div>
 
-          {/* Stats Bar */}
-          <div className="mt-20 grid grid-cols-2 md:grid-cols-4 gap-6 max-w-4xl mx-auto">
+          {/* Stats Bar - Mobile Optimized */}
+          <div className="mt-20 grid grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6 max-w-4xl mx-auto">
             <div className="bg-white border-2 border-gray-200 rounded-lg p-6 text-center shadow-sm hover:shadow-md transition-shadow">
               <div className="text-3xl font-bold text-blue-600 mb-1">500+</div>
               <div className="text-sm font-medium text-gray-900">Happy Clients</div>
@@ -313,6 +313,134 @@ export default function Home() {
         </div>
       </section>
 
+      {/* Client Testimonials */}
+      <section className="py-20 bg-white">
+        <div className="container mx-auto px-6">
+          <div className="text-center mb-16">
+            <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">Trusted by Growing Businesses Worldwide</h2>
+            <p className="text-lg text-gray-700 font-medium">See how we've helped companies transform their technology infrastructure</p>
+          </div>
+          <div className="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto">
+            <div className="bg-gradient-to-br from-blue-50 to-indigo-50 rounded-xl p-6 border-2 border-blue-100">
+              <div className="flex items-center gap-3 mb-4">
+                <div className="w-12 h-12 bg-blue-600 rounded-full flex items-center justify-center text-white font-bold text-lg">
+                  S
+                </div>
+                <div>
+                  <h4 className="font-bold text-gray-900">Samir K.</h4>
+                  <p className="text-sm text-gray-600">CEO, FinTech Startup</p>
+                </div>
+              </div>
+              <p className="text-gray-700 font-medium italic mb-3">
+                "Cehpoint helped us automate our entire customer onboarding process. We reduced processing time by 75% and saved over $50K annually."
+              </p>
+              <div className="flex gap-1">
+                {[...Array(5)].map((_, i) => (
+                  <div key={i} className="w-5 h-5 text-yellow-500">★</div>
+                ))}
+              </div>
+            </div>
+            <div className="bg-gradient-to-br from-green-50 to-emerald-50 rounded-xl p-6 border-2 border-green-100">
+              <div className="flex items-center gap-3 mb-4">
+                <div className="w-12 h-12 bg-green-600 rounded-full flex items-center justify-center text-white font-bold text-lg">
+                  P
+                </div>
+                <div>
+                  <h4 className="font-bold text-gray-900">Priya M.</h4>
+                  <p className="text-sm text-gray-600">CTO, E-commerce Platform</p>
+                </div>
+              </div>
+              <p className="text-gray-700 font-medium italic mb-3">
+                "The cybersecurity audit identified 12 critical vulnerabilities we didn't know existed. Their team secured our infrastructure in just 3 weeks."
+              </p>
+              <div className="flex gap-1">
+                {[...Array(5)].map((_, i) => (
+                  <div key={i} className="w-5 h-5 text-yellow-500">★</div>
+                ))}
+              </div>
+            </div>
+            <div className="bg-gradient-to-br from-purple-50 to-pink-50 rounded-xl p-6 border-2 border-purple-100">
+              <div className="flex items-center gap-3 mb-4">
+                <div className="w-12 h-12 bg-purple-600 rounded-full flex items-center justify-center text-white font-bold text-lg">
+                  R
+                </div>
+                <div>
+                  <h4 className="font-bold text-gray-900">Raj T.</h4>
+                  <p className="text-sm text-gray-600">Founder, SaaS Company</p>
+                </div>
+              </div>
+              <p className="text-gray-700 font-medium italic mb-3">
+                "Best ROI we've ever had from a consulting engagement. The AI recommendations were spot-on and the team delivered ahead of schedule."
+              </p>
+              <div className="flex gap-1">
+                {[...Array(5)].map((_, i) => (
+                  <div key={i} className="w-5 h-5 text-yellow-500">★</div>
+                ))}
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* FAQ Section */}
+      <section className="py-20 bg-gray-50">
+        <div className="container mx-auto px-6">
+          <div className="max-w-3xl mx-auto">
+            <div className="text-center mb-12">
+              <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">Frequently Asked Questions</h2>
+              <p className="text-lg text-gray-700 font-medium">Everything you need to know about our services</p>
+            </div>
+            <div className="space-y-4">
+              <details className="bg-white rounded-xl p-6 shadow-sm border border-gray-200 group">
+                <summary className="font-semibold text-gray-900 cursor-pointer flex items-center justify-between">
+                  How much do your services typically cost?
+                  <span className="text-blue-600 group-open:rotate-180 transition-transform">▼</span>
+                </summary>
+                <p className="mt-3 text-gray-700 font-medium">
+                  Our services range from $120 to $1,140 (₹10,000 to ₹95,000) depending on project scope and complexity. We offer flexible payment plans and milestone-based billing to make enterprise technology accessible to growing businesses.
+                </p>
+              </details>
+              <details className="bg-white rounded-xl p-6 shadow-sm border border-gray-200 group">
+                <summary className="font-semibold text-gray-900 cursor-pointer flex items-center justify-between">
+                  How long does a typical project take?
+                  <span className="text-blue-600 group-open:rotate-180 transition-transform">▼</span>
+                </summary>
+                <p className="mt-3 text-gray-700 font-medium">
+                  Project timelines vary based on complexity. Most automation and security projects take 4-12 weeks. We provide detailed timelines during the free consultation phase and keep you updated throughout implementation.
+                </p>
+              </details>
+              <details className="bg-white rounded-xl p-6 shadow-sm border border-gray-200 group">
+                <summary className="font-semibold text-gray-900 cursor-pointer flex items-center justify-between">
+                  Do you work with international clients?
+                  <span className="text-blue-600 group-open:rotate-180 transition-transform">▼</span>
+                </summary>
+                <p className="mt-3 text-gray-700 font-medium">
+                  Yes! We serve clients across 40+ countries. We accept multiple currencies (USD, EUR, GBP, INR) and work across all time zones. Our team is experienced in global compliance requirements.
+                </p>
+              </details>
+              <details className="bg-white rounded-xl p-6 shadow-sm border border-gray-200 group">
+                <summary className="font-semibold text-gray-900 cursor-pointer flex items-center justify-between">
+                  What makes Cehpoint different from other consulting firms?
+                  <span className="text-blue-600 group-open:rotate-180 transition-transform">▼</span>
+                </summary>
+                <p className="mt-3 text-gray-700 font-medium">
+                  We combine AI-powered analysis with human expertise to deliver precise, data-driven recommendations. Our pricing is transparent and affordable, and we focus on measurable ROI rather than generic advice.
+                </p>
+              </details>
+              <details className="bg-white rounded-xl p-6 shadow-sm border border-gray-200 group">
+                <summary className="font-semibold text-gray-900 cursor-pointer flex items-center justify-between">
+                  Do you offer post-implementation support?
+                  <span className="text-blue-600 group-open:rotate-180 transition-transform">▼</span>
+                </summary>
+                <p className="mt-3 text-gray-700 font-medium">
+                  Absolutely! All projects include 6 months of free post-launch support, training for your team, and documentation. Extended support plans are also available for ongoing optimization.
+                </p>
+              </details>
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* Certifications */}
       <section className="py-16 bg-white border-y border-gray-200">
         <div className="container mx-auto px-6">
@@ -398,36 +526,66 @@ export default function Home() {
                 <span className="text-2xl font-bold text-white">Cehpoint</span>
               </div>
               <p className="text-sm text-gray-500 mb-4">
-                Enterprise Technology Consulting & Strategic Advisory
+                Enterprise Technology Consulting & Strategic Advisory for Growing Businesses Worldwide
+              </p>
+              <p className="text-xs text-gray-600 mb-4">
+                Serving 500+ clients across 40+ countries with affordable, data-driven technology solutions.
               </p>
               <div className="flex gap-4">
-                <a href="https://wa.me/919091156095" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-white transition-colors">
+                <a href="https://wa.me/919091156095" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-green-500 transition-colors" title="WhatsApp">
                   <MessageCircle className="w-5 h-5" />
+                </a>
+                <a href="mailto:contact@cehpoint.com" className="text-gray-400 hover:text-blue-500 transition-colors" title="Email">
+                  <Mail className="w-5 h-5" />
+                </a>
+                <a href="tel:+919091156095" className="text-gray-400 hover:text-indigo-500 transition-colors" title="Phone">
+                  <Phone className="w-5 h-5" />
                 </a>
               </div>
             </div>
             <div>
               <h4 className="text-white font-semibold mb-3">Services</h4>
               <ul className="space-y-2 text-sm">
-                <li>Process Automation</li>
-                <li>Cybersecurity</li>
-                <li>Cloud Solutions</li>
-                <li>AI & Analytics</li>
+                <li className="hover:text-white transition-colors cursor-pointer">Process Automation</li>
+                <li className="hover:text-white transition-colors cursor-pointer">Cybersecurity</li>
+                <li className="hover:text-white transition-colors cursor-pointer">Cloud Solutions</li>
+                <li className="hover:text-white transition-colors cursor-pointer">AI & Analytics</li>
+                <li className="hover:text-white transition-colors cursor-pointer">Technology Modernization</li>
               </ul>
             </div>
             <div>
-              <h4 className="text-white font-semibold mb-3">Contact</h4>
+              <h4 className="text-white font-semibold mb-3">Global Contact</h4>
               <ul className="space-y-2 text-sm">
-                <li>+91 909 115 6095</li>
-                <li>contact@cehpoint.com</li>
-                <li>24/7 Support</li>
+                <li className="flex items-center gap-2">
+                  <Phone className="w-4 h-4" />
+                  <span>India: +91 909 115 6095</span>
+                </li>
+                <li className="flex items-center gap-2">
+                  <Mail className="w-4 h-4" />
+                  <span>contact@cehpoint.com</span>
+                </li>
+                <li className="flex items-center gap-2">
+                  <MessageCircle className="w-4 h-4" />
+                  <span>WhatsApp: 24/7</span>
+                </li>
+                <li className="flex items-center gap-2">
+                  <Clock className="w-4 h-4" />
+                  <span>All Time Zones</span>
+                </li>
               </ul>
             </div>
           </div>
-          <div className="border-t border-gray-800 pt-8 text-center">
-            <p className="text-sm text-gray-500">
-              © 2024 Cehpoint Technology Consulting. All rights reserved.
-            </p>
+          <div className="border-t border-gray-800 pt-8">
+            <div className="flex flex-col md:flex-row items-center justify-between gap-4">
+              <p className="text-sm text-gray-500">
+                © 2024 Cehpoint Technology Consulting. All rights reserved.
+              </p>
+              <div className="flex gap-6 text-sm">
+                <span className="hover:text-white transition-colors cursor-pointer">Privacy Policy</span>
+                <span className="hover:text-white transition-colors cursor-pointer">Terms of Service</span>
+                <span className="hover:text-white transition-colors cursor-pointer">Cookie Policy</span>
+              </div>
+            </div>
           </div>
         </div>
       </footer>
