@@ -42,14 +42,17 @@ export default function Home() {
           <div className="max-w-4xl mx-auto text-center">
             <div className="inline-flex items-center gap-2 bg-blue-50 text-blue-700 px-4 py-2 rounded-full text-sm font-medium mb-8">
               <Award className="w-4 h-4" />
-              Trusted by 500+ Global Enterprises
+              Trusted by 500+ Enterprises Worldwide
             </div>
             <h1 className="text-4xl md:text-6xl font-bold text-gray-900 mb-6 leading-tight">
-              Strategic Technology Solutions
-              <span className="block text-gray-700 mt-2">for Modern Businesses</span>
+              Affordable Technology Solutions
+              <span className="block text-blue-600 mt-2">for Indian Businesses</span>
             </h1>
-            <p className="text-xl text-gray-600 mb-10 leading-relaxed max-w-3xl mx-auto">
-              Cehpoint partners with enterprises to deliver comprehensive IT, cybersecurity, and automation strategies powered by intelligent analysis.
+            <p className="text-xl text-gray-700 mb-4 leading-relaxed max-w-3xl mx-auto font-medium">
+              Cehpoint delivers enterprise-grade IT, cybersecurity, and automation strategies at prices designed for Indian startups and SMEs.
+            </p>
+            <p className="text-lg text-green-700 font-semibold mb-10">
+              Starting from just ₹25,000 - World-class technology made accessible
             </p>
             <div className="flex gap-4 justify-center flex-wrap">
               <Button size="lg" onClick={() => router.push('/login')} className="px-8 shadow-lg">
@@ -60,7 +63,7 @@ export default function Home() {
                 href="https://wa.me/919091156095?text=Hi%2C%20I%20would%20like%20to%20learn%20more%20about%20Cehpoint%27s%20technology%20consulting%20services."
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center justify-center gap-2 px-8 py-4 text-lg font-semibold text-gray-700 bg-white border-2 border-gray-300 rounded-lg hover:bg-gray-50 transition-all"
+                className="inline-flex items-center justify-center gap-2 px-8 py-4 text-lg font-semibold text-gray-900 bg-white border-2 border-gray-900 rounded-lg hover:bg-gray-900 hover:text-white hover:border-gray-900 transition-all shadow-md hover:shadow-lg"
               >
                 <MessageCircle className="w-5 h-5" />
                 Contact Us
@@ -70,21 +73,21 @@ export default function Home() {
 
           {/* Stats Bar */}
           <div className="mt-20 grid grid-cols-2 md:grid-cols-4 gap-6 max-w-4xl mx-auto">
-            <div className="bg-white border border-gray-200 rounded-lg p-6 text-center">
-              <div className="text-3xl font-bold text-gray-900 mb-1">500+</div>
-              <div className="text-sm text-gray-600">Client Engagements</div>
+            <div className="bg-white border-2 border-gray-200 rounded-lg p-6 text-center shadow-sm hover:shadow-md transition-shadow">
+              <div className="text-3xl font-bold text-blue-600 mb-1">500+</div>
+              <div className="text-sm font-medium text-gray-900">Happy Clients</div>
             </div>
-            <div className="bg-white border border-gray-200 rounded-lg p-6 text-center">
-              <div className="text-3xl font-bold text-gray-900 mb-1">95%</div>
-              <div className="text-sm text-gray-600">Success Rate</div>
+            <div className="bg-white border-2 border-gray-200 rounded-lg p-6 text-center shadow-sm hover:shadow-md transition-shadow">
+              <div className="text-3xl font-bold text-green-600 mb-1">95%</div>
+              <div className="text-sm font-medium text-gray-900">Success Rate</div>
             </div>
-            <div className="bg-white border border-gray-200 rounded-lg p-6 text-center">
-              <div className="text-3xl font-bold text-gray-900 mb-1">$2.4M</div>
-              <div className="text-sm text-gray-600">Avg. ROI</div>
+            <div className="bg-white border-2 border-gray-200 rounded-lg p-6 text-center shadow-sm hover:shadow-md transition-shadow">
+              <div className="text-3xl font-bold text-purple-600 mb-1">₹25K+</div>
+              <div className="text-sm font-medium text-gray-900">Starting Price</div>
             </div>
-            <div className="bg-white border border-gray-200 rounded-lg p-6 text-center">
-              <div className="text-3xl font-bold text-gray-900 mb-1">24/7</div>
-              <div className="text-sm text-gray-600">Support</div>
+            <div className="bg-white border-2 border-gray-200 rounded-lg p-6 text-center shadow-sm hover:shadow-md transition-shadow">
+              <div className="text-3xl font-bold text-indigo-600 mb-1">24/7</div>
+              <div className="text-sm font-medium text-gray-900">Support</div>
             </div>
           </div>
         </div>
@@ -97,58 +100,149 @@ export default function Home() {
             <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
               Comprehensive Technology Services
             </h2>
-            <p className="text-lg text-gray-600">
-              End-to-end solutions designed to accelerate digital transformation and operational excellence
+            <p className="text-lg text-gray-700 mb-2 font-medium">
+              End-to-end solutions designed for Indian businesses - enterprise quality at startup prices
+            </p>
+            <p className="text-md text-green-600 font-semibold">
+              Flexible payment plans available • No hidden costs
             </p>
           </div>
           
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6 max-w-6xl mx-auto">
-            <div className="group bg-white border border-gray-200 rounded-lg p-6 hover:border-blue-500 hover:shadow-lg transition-all">
+            <div className="group bg-white border-2 border-gray-200 rounded-lg p-6 hover:border-blue-500 hover:shadow-xl transition-all cursor-pointer">
               <div className="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center mb-4 group-hover:bg-blue-600 transition-colors">
                 <Target className="w-6 h-6 text-blue-600 group-hover:text-white transition-colors" />
               </div>
-              <h3 className="text-lg font-semibold text-gray-900 mb-2">
+              <h3 className="text-lg font-semibold text-gray-900 mb-2 group-hover:text-blue-600 transition-colors">
                 Process Automation
               </h3>
-              <p className="text-sm text-gray-600 leading-relaxed">
+              <p className="text-sm text-gray-700 leading-relaxed font-medium mb-3">
                 Intelligent workflow optimization and RPA implementation to reduce costs and increase efficiency
               </p>
+              <p className="text-xs text-green-600 font-semibold">From ₹50,000</p>
             </div>
 
-            <div className="group bg-white border border-gray-200 rounded-lg p-6 hover:border-red-500 hover:shadow-lg transition-all">
+            <div className="group bg-white border-2 border-gray-200 rounded-lg p-6 hover:border-red-500 hover:shadow-xl transition-all cursor-pointer">
               <div className="w-12 h-12 bg-red-100 rounded-lg flex items-center justify-center mb-4 group-hover:bg-red-600 transition-colors">
                 <Shield className="w-6 h-6 text-red-600 group-hover:text-white transition-colors" />
               </div>
-              <h3 className="text-lg font-semibold text-gray-900 mb-2">
+              <h3 className="text-lg font-semibold text-gray-900 mb-2 group-hover:text-red-600 transition-colors">
                 Cybersecurity
               </h3>
-              <p className="text-sm text-gray-600 leading-relaxed">
+              <p className="text-sm text-gray-700 leading-relaxed font-medium mb-3">
                 Enterprise-grade security architecture, compliance management, and threat protection
               </p>
+              <p className="text-xs text-green-600 font-semibold">From ₹75,000</p>
             </div>
 
-            <div className="group bg-white border border-gray-200 rounded-lg p-6 hover:border-purple-500 hover:shadow-lg transition-all">
+            <div className="group bg-white border-2 border-gray-200 rounded-lg p-6 hover:border-purple-500 hover:shadow-xl transition-all cursor-pointer">
               <div className="w-12 h-12 bg-purple-100 rounded-lg flex items-center justify-center mb-4 group-hover:bg-purple-600 transition-colors">
                 <Cloud className="w-6 h-6 text-purple-600 group-hover:text-white transition-colors" />
               </div>
-              <h3 className="text-lg font-semibold text-gray-900 mb-2">
+              <h3 className="text-lg font-semibold text-gray-900 mb-2 group-hover:text-purple-600 transition-colors">
                 Cloud Solutions
               </h3>
-              <p className="text-sm text-gray-600 leading-relaxed">
+              <p className="text-sm text-gray-700 leading-relaxed font-medium mb-3">
                 Migration, optimization, and management of cloud infrastructure across AWS, Azure, and GCP
               </p>
+              <p className="text-xs text-green-600 font-semibold">From ₹60,000</p>
             </div>
 
-            <div className="group bg-white border border-gray-200 rounded-lg p-6 hover:border-green-500 hover:shadow-lg transition-all">
+            <div className="group bg-white border-2 border-gray-200 rounded-lg p-6 hover:border-green-500 hover:shadow-xl transition-all cursor-pointer">
               <div className="w-12 h-12 bg-green-100 rounded-lg flex items-center justify-center mb-4 group-hover:bg-green-600 transition-colors">
                 <Brain className="w-6 h-6 text-green-600 group-hover:text-white transition-colors" />
               </div>
-              <h3 className="text-lg font-semibold text-gray-900 mb-2">
+              <h3 className="text-lg font-semibold text-gray-900 mb-2 group-hover:text-green-600 transition-colors">
                 AI & Analytics
               </h3>
-              <p className="text-sm text-gray-600 leading-relaxed">
+              <p className="text-sm text-gray-700 leading-relaxed font-medium mb-3">
                 Machine learning models, predictive analytics, and data-driven decision intelligence
               </p>
+              <p className="text-xs text-green-600 font-semibold">From ₹1,00,000</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Pricing Section for Indian Market */}
+      <section className="py-20 bg-gradient-to-br from-green-50 to-blue-50">
+        <div className="container mx-auto px-6">
+          <div className="max-w-4xl mx-auto">
+            <div className="text-center mb-12">
+              <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
+                Transparent Pricing for Indian Businesses
+              </h2>
+              <p className="text-lg text-gray-700 font-medium mb-2">
+                Enterprise-quality solutions at prices designed for the Indian market
+              </p>
+              <p className="text-md text-green-600 font-semibold">
+                No hidden fees • Flexible payment options • EMI available
+              </p>
+            </div>
+            
+            <div className="bg-white rounded-2xl shadow-xl p-8 md:p-12 border-2 border-blue-200">
+              <div className="grid md:grid-cols-2 gap-8 mb-8">
+                <div className="space-y-4">
+                  <h3 className="text-xl font-bold text-gray-900 mb-4">✓ What's Included</h3>
+                  <div className="flex items-start gap-3">
+                    <CheckCircle className="w-5 h-5 text-green-600 flex-shrink-0 mt-0.5" />
+                    <p className="text-sm text-gray-700 font-medium">Free initial consultation & business analysis</p>
+                  </div>
+                  <div className="flex items-start gap-3">
+                    <CheckCircle className="w-5 h-5 text-green-600 flex-shrink-0 mt-0.5" />
+                    <p className="text-sm text-gray-700 font-medium">Detailed project roadmap & timeline</p>
+                  </div>
+                  <div className="flex items-start gap-3">
+                    <CheckCircle className="w-5 h-5 text-green-600 flex-shrink-0 mt-0.5" />
+                    <p className="text-sm text-gray-700 font-medium">6 months post-launch support included</p>
+                  </div>
+                  <div className="flex items-start gap-3">
+                    <CheckCircle className="w-5 h-5 text-green-600 flex-shrink-0 mt-0.5" />
+                    <p className="text-sm text-gray-700 font-medium">Training for your team</p>
+                  </div>
+                </div>
+                
+                <div className="space-y-4">
+                  <h3 className="text-xl font-bold text-gray-900 mb-4">💳 Payment Options</h3>
+                  <div className="flex items-start gap-3">
+                    <CheckCircle className="w-5 h-5 text-blue-600 flex-shrink-0 mt-0.5" />
+                    <p className="text-sm text-gray-700 font-medium">Milestone-based payments (no upfront 100%)</p>
+                  </div>
+                  <div className="flex items-start gap-3">
+                    <CheckCircle className="w-5 h-5 text-blue-600 flex-shrink-0 mt-0.5" />
+                    <p className="text-sm text-gray-700 font-medium">EMI options available for projects above ₹1 lakh</p>
+                  </div>
+                  <div className="flex items-start gap-3">
+                    <CheckCircle className="w-5 h-5 text-blue-600 flex-shrink-0 mt-0.5" />
+                    <p className="text-sm text-gray-700 font-medium">UPI, Bank Transfer, International cards accepted</p>
+                  </div>
+                  <div className="flex items-start gap-3">
+                    <CheckCircle className="w-5 h-5 text-blue-600 flex-shrink-0 mt-0.5" />
+                    <p className="text-sm text-gray-700 font-medium">GST compliant invoicing</p>
+                  </div>
+                </div>
+              </div>
+              
+              <div className="bg-gradient-to-r from-blue-50 to-indigo-50 rounded-xl p-6 border-2 border-blue-200">
+                <h3 className="text-lg font-bold text-gray-900 mb-3">🎉 Special Offer for Startups</h3>
+                <p className="text-gray-700 font-medium mb-4">
+                  YC-backed or funded startups get <span className="text-blue-600 font-bold">20% discount</span> on all services
+                </p>
+                <div className="flex flex-wrap gap-4">
+                  <a
+                    href="https://wa.me/919091156095?text=Hi%2C%20I%20want%20to%20discuss%20pricing%20for%20my%20startup"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-2 px-6 py-3 bg-green-600 text-white font-semibold rounded-lg hover:bg-green-700 transition-all shadow-md hover:shadow-lg"
+                  >
+                    <MessageCircle className="w-4 h-4" />
+                    Get Custom Quote
+                  </a>
+                  <Button onClick={() => router.push('/login')} variant="outline" className="border-2 border-blue-600 text-blue-600 hover:bg-blue-600 hover:text-white font-semibold">
+                    View Sample Projects
+                  </Button>
+                </div>
+              </div>
             </div>
           </div>
         </div>
@@ -163,7 +257,7 @@ export default function Home() {
                 <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-6">
                   Data-Driven Technology Strategy
                 </h2>
-                <p className="text-lg text-gray-600 mb-8 leading-relaxed">
+                <p className="text-lg text-gray-700 mb-8 leading-relaxed font-medium">
                   Our AI-powered platform analyzes your business operations, technology stack, and industry landscape to deliver precise, actionable recommendations aligned with your strategic objectives.
                 </p>
                 <div className="space-y-4">
@@ -173,7 +267,7 @@ export default function Home() {
                     </div>
                     <div>
                       <h4 className="font-semibold text-gray-900 mb-1">Comprehensive Analysis</h4>
-                      <p className="text-sm text-gray-600">7-point business assessment covering operations, technology, and market position</p>
+                      <p className="text-sm text-gray-700 font-medium">7-point business assessment covering operations, technology, and market position</p>
                     </div>
                   </div>
                   <div className="flex items-start gap-3">
@@ -182,7 +276,7 @@ export default function Home() {
                     </div>
                     <div>
                       <h4 className="font-semibold text-gray-900 mb-1">ROI-Focused Solutions</h4>
-                      <p className="text-sm text-gray-600">Every recommendation includes detailed impact analysis and financial projections</p>
+                      <p className="text-sm text-gray-700 font-medium">Every recommendation includes detailed impact analysis and financial projections</p>
                     </div>
                   </div>
                   <div className="flex items-start gap-3">
@@ -191,7 +285,7 @@ export default function Home() {
                     </div>
                     <div>
                       <h4 className="font-semibold text-gray-900 mb-1">Implementation Roadmap</h4>
-                      <p className="text-sm text-gray-600">Detailed project blueprint with phases, timelines, and resource requirements</p>
+                      <p className="text-sm text-gray-700 font-medium">Detailed project blueprint with phases, timelines, and resource requirements</p>
                     </div>
                   </div>
                 </div>
@@ -211,7 +305,7 @@ export default function Home() {
         <div className="container mx-auto px-6">
           <div className="text-center mb-12">
             <h3 className="text-2xl font-bold text-gray-900 mb-2">Industry Certifications & Compliance</h3>
-            <p className="text-gray-600">Maintaining the highest standards in technology consulting</p>
+            <p className="text-gray-700 font-medium">Maintaining the highest standards in technology consulting</p>
           </div>
           <div className="grid grid-cols-2 md:grid-cols-4 gap-8 max-w-4xl mx-auto">
             <div className="text-center">
@@ -269,7 +363,7 @@ export default function Home() {
                 href="https://wa.me/919091156095?text=Hi%2C%20I%27d%20like%20to%20schedule%20a%20consultation%20with%20Cehpoint."
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center justify-center gap-2 px-8 py-4 text-lg font-semibold text-white bg-transparent border-2 border-white rounded-lg hover:bg-white hover:text-blue-600 transition-all"
+                className="inline-flex items-center justify-center gap-2 px-8 py-4 text-lg font-semibold text-white bg-transparent border-2 border-white rounded-lg hover:bg-white hover:text-blue-600 transition-all shadow-lg hover:shadow-xl"
               >
                 <MessageCircle className="w-5 h-5" />
                 Contact Sales

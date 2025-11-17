@@ -480,12 +480,9 @@ export default function Questionnaire() {
       
       <div className="container mx-auto px-4 py-8 md:py-12">
         <div className="text-center mb-8">
-          <div className="flex items-center justify-center gap-2 mb-4">
-            <Sparkles className="w-8 h-8 text-indigo-600" />
-            <h1 className="text-3xl md:text-4xl font-bold bg-gradient-to-r from-blue-600 to-indigo-600 bg-clip-text text-transparent">
-              Business Profile Questionnaire
-            </h1>
-          </div>
+          <h1 className="text-3xl md:text-4xl font-bold bg-gradient-to-r from-blue-600 to-indigo-600 bg-clip-text text-transparent mb-4">
+            Business Profile Questionnaire
+          </h1>
           <p className="text-gray-600 max-w-2xl mx-auto">
             Share your business details and get real-time AI-powered recommendations as you go
           </p>
@@ -661,7 +658,7 @@ export default function Questionnaire() {
                   <div className="mb-6">
                     <div className="flex items-center gap-2 mb-4">
                       <Lightbulb className="w-6 h-6 text-indigo-600" />
-                      <h3 className="text-lg font-bold text-gray-900">AI Insights</h3>
+                      <h3 className="text-lg font-bold text-gray-900">Cehpoint AI Insights</h3>
                     </div>
                     <p className="text-sm text-gray-600">
                       Based on your responses, here are personalized recommendations
